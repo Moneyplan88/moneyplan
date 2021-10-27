@@ -23,6 +23,7 @@ import './theme/variables.css';
 import { Redirect, Route } from 'react-router';
 import Onboarding from './pages/Onboarding';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 const App: React.FC = () => {
   return (
@@ -31,6 +32,7 @@ const App: React.FC = () => {
           <IonRouterOutlet id="main">
             <Route exact path='/start' component={Onboarding}/>
             <Route exact path='/login' component={Login}/>
+            <Route exact path='/register' component={Register}/>
             <Redirect exact from='/' to='/start'/>
           </IonRouterOutlet>
       </IonReactRouter>
