@@ -1,0 +1,7 @@
+{
+  "name": "gebetapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
