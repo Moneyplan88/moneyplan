@@ -24,13 +24,14 @@ import { Redirect, Route } from 'react-router';
 import Onboarding from './pages/Onboarding';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Welcome from './pages/Welcome';
 
 const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
           <IonRouterOutlet id="main">
-            <Route exact path='/start' component={Onboarding}/>
+            <Route exact path='/start' component={Welcome}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register}/>
             <Redirect exact from='/' to='/start'/>
