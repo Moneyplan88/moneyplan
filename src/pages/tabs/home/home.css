@@ -1,0 +1,57 @@
+.home-card {
+    width: 100px;
+}
+
+.card-container {
+    display: flex;
+}
+
+.card-content {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+ion-card {
+    border-radius: 15px;
+}
+
+.card-trans {
+    background-color: #b3aeae;
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.value-trans {
+    margin-left: 140px;
+    margin-top: 5px;
+}
+
+.card-title {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.latest-trans {
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.header-card {
+    background-color: #16089b;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    padding-top: 30px;
+    padding-left: 20px;
+    height: 125px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.header-content {
+    margin-left: 35px;
+}
