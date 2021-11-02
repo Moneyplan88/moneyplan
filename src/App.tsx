@@ -25,6 +25,8 @@ import Onboarding from './pages/Onboarding';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Tabs from './pages/tabs/Tabs';
+import WalletList from './pages/wallet/walletList';
+import Welcome from './pages/Welcome';
 
 
 const App: React.FC = () => {
@@ -32,7 +34,9 @@ const App: React.FC = () => {
     <IonApp>
       <IonReactRouter>
           <IonRouterOutlet id="main">
+            <Route exact path="/wallet" component={WalletList} />
             <Route exact path='/start' component={Onboarding}/>
+            <Route exact path='/start' component={Welcome}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register}/>
             <Route path="/tabs" component={Tabs} />
