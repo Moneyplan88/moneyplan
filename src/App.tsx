@@ -1,6 +1,6 @@
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-
+import './theme/darkMode.css'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -26,6 +26,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import WalletList from './pages/wallet/walletList';
 import Welcome from './pages/Welcome';
+import Settings from './pages/Settings';
 
 
 const App: React.FC = () => {
@@ -33,6 +34,7 @@ const App: React.FC = () => {
     <IonApp>
       <IonReactRouter>
           <IonRouterOutlet id="main">
+            <Route exact path="/settings" component={Settings} />
             <Route exact path="/wallet" component={WalletList} />
             <Route exact path='/start' component={Onboarding}/>
             <Route exact path='/start' component={Welcome}/>

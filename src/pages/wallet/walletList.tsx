@@ -2,25 +2,11 @@ import React from "react"
 import {IonBackButton,IonItemSliding, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonItem, IonItemOption, IonItemOptions, IonLabel, IonList, IonThumbnail, isPlatform, IonFab, IonFabButton} from "@ionic/react"
 import {add, arrowBack, create, femaleOutline, heart, maleOutline, personCircle, trash} from "ionicons/icons"
 import "./walletList.css"
+import TitleBar from "../../components/TitleBar"
 const WalletList:React.FC = () => {
     return(
         <IonPage>
-            <IonHeader className="ion-no-border">
-                <IonToolbar color="false">
-                    <IonButtons slot="start">
-                        {isPlatform('ios') ? 
-                            <IonBackButton defaultHref="home" icon={arrowBack} style={{marginLeft: '10px',width:'20px'}}  text="" />
-                        : 
-                            <IonBackButton defaultHref="home" />}
-                    </IonButtons>
-                    <IonTitle style={{fontWeight: 'bolder'}}>Your Wallet</IonTitle>
-                    <IonButtons slot="end">
-                        <IonButton>
-                            <IonIcon icon={personCircle} style={{width:'30px', height:'30px'}}/>
-                        </IonButton>
-                    </IonButtons>
-                </IonToolbar>
-            </IonHeader>
+            <TitleBar title="Your Wallet" profile={true} />
 
 
             <IonContent className="container">
