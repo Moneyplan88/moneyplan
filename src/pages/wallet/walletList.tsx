@@ -55,8 +55,11 @@ const WalletList:React.FC = () => {
                                             }}>Gopay Current Balance</IonLabel>
                                             <p style={{
                                                 fontSize: '1.2rem',
-                                                marginTop: '5px',
-                                                fontWeight: 'bold'
+                                                marginTop: '8px',
+                                                textAlign: 'left',
+                                                fontWeight: 'bold',
+                                                padding: '0px 0px',
+                                                color: 'white'
                                             }}>Rp 3.000.000</p>
                                             </div>
                                         
@@ -90,8 +93,10 @@ const WalletList:React.FC = () => {
                                             }}>Dana Current Balance</IonLabel>
                                             <p style={{
                                                 fontSize: '1.2rem',
-                                                marginTop: '5px',
-                                                fontWeight: 'bold'
+                                                marginTop: '8px',
+                                                fontWeight: 'bold',
+                                                padding: '0px 0px',
+                                                color: 'white'
                                             }}>Rp 4.065.000</p>
                                             </div>
                                         
@@ -124,8 +129,10 @@ const WalletList:React.FC = () => {
                                             }}>OVO Current Balance</IonLabel>
                                             <p style={{
                                                 fontSize: '1.2rem',
-                                                marginTop: '5px',
-                                                fontWeight: 'bold'
+                                                marginTop: '8px',
+                                                fontWeight: 'bold',
+                                                padding: '0px 0px',
+                                                color: 'white'
                                             }}>Rp 935.330</p>
                                             </div>
                                         
