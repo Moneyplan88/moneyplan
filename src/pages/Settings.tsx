@@ -7,6 +7,8 @@ import './Settings.css'
 const Settings:React.FC = () => {
     const toggleDarkModeHandler = () => {
         // document.body.classList.toggle("dark");
+        // document.body.classList.toggle("dark");
+        // document.body.classList.toggle("dark");
     };
 
     return(
