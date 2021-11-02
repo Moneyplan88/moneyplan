@@ -1,0 +1,11 @@
+.card-wallet{
+    box-shadow: 1px 2px 4px 2px #ebebeb;
+    border-radius: 15px;
+   
+    
+}
+
+.item-background-color{
+    --ion-item-background-color: #D3E1FF;
+}
+
