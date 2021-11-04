@@ -15,7 +15,7 @@ const TitleBar: React.FC<{title:string, profile:Boolean}> = (props) => {
                     <IonTitle style={{fontWeight: 'bolder'}}>{props.title}</IonTitle>
                     <IonButtons slot="end">
                         {props.profile &&    
-                        <IonButton>
+                        <IonButton routerLink="/settings">
                             <IonIcon icon={personCircle} style={{width:'30px', height:'30px'}}/>
                         </IonButton>
                         }

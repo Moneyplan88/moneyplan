@@ -1,6 +1,6 @@
 import React from "react"
-import {IonBackButton,IonItemSliding, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonItem, IonItemOption, IonItemOptions, IonLabel, IonList, IonThumbnail, isPlatform, IonFab, IonFabButton} from "@ionic/react"
-import {add, arrowBack, create, femaleOutline, heart, maleOutline, personCircle, trash} from "ionicons/icons"
+import {IonItemSliding, IonContent, IonIcon, IonPage, IonItem, IonItemOption, IonItemOptions, IonLabel, IonList, IonFab, IonFabButton} from "@ionic/react"
+import {add, create, trash} from "ionicons/icons"
 import "./walletList.css"
 import TitleBar from "../../components/TitleBar"
 const WalletList:React.FC = () => {
