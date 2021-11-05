@@ -1,13 +1,16 @@
 .home-card {
-    width: 100px;
+    width: 35%;
+    max-width: 150px;
 }
 
 .card-container {
     display: flex;
+    /* border: solid; */
+    align-items: center;
 }
 
 .card-content {
-    margin-top: 30px;
+    /* margin-top: 20px; */
     margin-left: 30px;
 }
 
@@ -40,10 +43,10 @@ ion-card {
 }
 
 .header-card {
-    background-color: #16089b;
+    background-color: #013496;
     color: white;
-    font-weight: bold;
-    font-size: 20px;
+    /* font-weight: bold; */
+    /* font-size: 20px; */
     display: flex;
     padding-top: 30px;
     padding-left: 20px;
@@ -53,5 +56,9 @@ ion-card {
 }
 
 .header-content {
-    margin-left: 35px;
+    margin-left: 20px;
+}
+
+.trans-item{
+    box-shadow: 0 3px 10px  rgb(4 17 60 / 0.5);
 }
