@@ -25,6 +25,8 @@ import Onboarding from './pages/Onboarding';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Tabs from './pages/tabs/Tabs';
+import AddTransaction from './pages/tabs/transaction/AddTransaction';
+import EditTransaction from './pages/tabs/transaction/EditTransaction';
 import WalletList from './pages/wallet/walletList';
 import Welcome from './pages/Welcome';
 import Settings from './pages/Settings';
@@ -41,6 +43,8 @@ const App: React.FC = () => {
             <Route exact path='/start' component={Welcome}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register}/>
+            <Route exact path='/addTransaction' component={AddTransaction}/>
+            <Route exact path='/editTransaction' component={EditTransaction}/>
             <Route path="/tabs" component={Tabs} />
             <Redirect exact from='/' to='/start'/>
           </IonRouterOutlet>

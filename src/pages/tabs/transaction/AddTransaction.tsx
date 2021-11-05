@@ -1,9 +1,9 @@
 import { IonContent, IonHeader, IonLabel, IonPage, IonSegment, IonSegmentButton, IonTitle, IonToolbar } from "@ionic/react"
 import { useState } from "react"
-import Income from "./segment/Income"
-import Expense from "./segment/Expense"
+import AddIncome from "./segment/add/AddIncome"
+import AddExpense from "./segment/add/AddExpense"
 
-const Transaction:React.FC = () => {
+const AddTransaction:React.FC = () => {
     const [selected,setSelected] = useState<string>('Income')
     return(
         <IonPage>
@@ -14,7 +14,7 @@ const Transaction:React.FC = () => {
                 }}>
                  <IonToolbar color="false">
                      <IonTitle>
-                         Transaction
+                         Add Transaction
                      </IonTitle>
                  </IonToolbar>
                  <IonSegment value={selected} onIonChange={e => {
@@ -38,12 +38,12 @@ const Transaction:React.FC = () => {
 
             <IonContent>
                 {selected==='Income' ? (
-                    <Income />
+                    <AddIncome />
                 ) : selected==='Expense' ? (
-                    <Expense />
+                    <AddExpense />
                 ) : ''}
             </IonContent>
         </IonPage>
     )
 }
-export default Transaction;
+export default AddTransaction;
