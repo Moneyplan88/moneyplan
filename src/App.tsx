@@ -30,9 +30,18 @@ import EditTransaction from './pages/tabs/transaction/EditTransaction';
 import WalletList from './pages/wallet/walletList';
 import Welcome from './pages/Welcome';
 import Settings from './pages/Settings';
+import UserContext from './data/user-context';
+import { useContext, useEffect } from 'react';
 
 
 const App: React.FC = () => {
+  const userContext = useContext(UserContext)
+  const {initContext} = userContext
+
+  useEffect(() => {
+    initContext()
+  }, [initContext])
+
   return (
     <IonApp>
       <IonReactRouter>

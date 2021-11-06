@@ -7,10 +7,13 @@ import reportWebVitals from './reportWebVitals';
 
 /* The following line can be included in your src/index.js or App.js file */
 import './App.scss';
+import UserContextProvider from './data/UserContextProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <UserContextProvider>
+      <App />
+    </UserContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
