@@ -1,4 +1,4 @@
-import {IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar, useIonToast } from '@ionic/react';
+import {IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar, useIonLoading, useIonToast } from '@ionic/react';
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import { urlRegister } from '../data/Urls';
@@ -8,6 +8,8 @@ const Register: React.FC = () => {
   const [presentToast, dismissToast] = useIonToast()
   const history = useHistory()
   const userContext = useContext(UserContext)
+
+  const [showLoader, hideLoader] = useIonLoading()
 
   // TODO: Redirect user if token already exists 
   // if(userContext.token != ''){
@@ -44,27 +46,33 @@ const Register: React.FC = () => {
 
     console.info(formData)
 
+    showLoader({
+      message: "Loading...",
+      spinner: "circular"
+    })
     fetch(urlRegister,{ 
       method: "POST",
       body: formData
     }).then(res => res.json())
     .then(data => {
       console.log(data)
+      hideLoader()
 
       // Sukses login
-      if(data.message == "Login success"){
-        showToast('Login success','success')
+      if (data.success == true) {
+        showToast('Login success', 'success')
 
         // Simpan token
-        userContext.storeToken(data.token)
+        userContext.storeToken(data.data.token)
 
         // TODO: Redirect to dashboard
         history.push('/wallet')
       }
       // Gagal login
-      else{
-        showToast(data.errors[0].msg,'danger')
+      else {
+        showToast(data.errors.message, 'danger')
       }
+      
     })
   }
 
