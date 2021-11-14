@@ -32,6 +32,7 @@ import Welcome from './pages/Welcome';
 import Settings from './pages/Settings';
 import UserContext from './data/user-context';
 import { useContext, useEffect } from 'react';
+import EditSettings from './pages/EditSettings';
 
 
 const App: React.FC = () => {
@@ -47,6 +48,7 @@ const App: React.FC = () => {
       <IonReactRouter>
           <IonRouterOutlet id="main">
             <Route exact path="/settings" component={Settings} />
+            <Route exact path="/settings/edit" component={EditSettings} />
             <Route exact path="/wallet" component={WalletList} />
             {/* <Route exact path='/start' component={Onboarding}/> */}
             <Route exact path='/start' component={Welcome}/>

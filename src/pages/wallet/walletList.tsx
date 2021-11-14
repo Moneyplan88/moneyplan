@@ -1,14 +1,25 @@
-import React from "react"
+import React, { useContext, useEffect } from "react"
 import {IonItemSliding, IonContent, IonIcon, IonPage, IonItem, IonItemOption, IonItemOptions, IonLabel, IonList, IonFab, IonFabButton} from "@ionic/react"
 import {add, create, trash} from "ionicons/icons"
 import "./walletList.css"
 import TitleBar from "../../components/TitleBar"
+import { useHistory } from "react-router"
+import UserContext from "../../data/user-context"
 const WalletList:React.FC = () => {
+    const history = useHistory()
+    const userContext = useContext(UserContext)
+
+    useEffect(() => {
+        if(userContext.token == ''){
+            history.push('/login')
+        }else{
+            console.info("has token")
+        }
+    }, [userContext])
+    
     return(
         <IonPage>
             <TitleBar title="Your Wallet" profile={true} />
-
-
             <IonContent className="container">
                     <IonFab vertical="bottom" horizontal="end" slot="fixed">
                         <IonFabButton>

@@ -13,7 +13,7 @@ import {
 
   import homeCard from './images-home/home.png';
   import './home.css';
-import { bag, wallet } from 'ionicons/icons';
+import { bag, chevronForwardOutline, wallet } from 'ionicons/icons';
 import { useContext, useEffect } from 'react';
 import UserContext from '../../../data/user-context';
 import { useHistory } from 'react-router';
@@ -40,32 +40,32 @@ const Home = () => {
         </IonRouterLink>
       </div>
       <div className="header-content"> 
-        <div style={{fontSize:'24px',fontWeight:'bold'}}>Hi, {userContext.user.name}! </div>
-        <div style={{textAlign: 'left', fontSize:'18px'}}>
-            Welcome Back
+        <div style={{fontSize:'1.2em',fontWeight:'bold'}}>Hi, {userContext.user.name}! </div>
+        <div style={{textAlign: 'left', fontSize:'0.8em'}}>
+            Welcome Back!
         </div>
       </div>
     </div>
     <IonContent>
         <IonCard>
             <IonCardContent>
+              <IonRouterLink routerLink="/wallet">
                 <div className="card-container">
                     <img className="home-card" src={homeCard}/>
-                    <div className="card-content">
+                    <div className="card-content mx-3">
                       <div style={{fontSize:'12px', fontWeight:'bold'}}>
                         Your balance 
                       </div>
                       <div style={{fontSize:'24px', fontWeight:'bolder'}}>
                         Rp. 7.065.000
                       </div>
-                    
-                      <div className="mt-3" style={{display:'flex'}}>
+                      <div className="mt-2" style={{display:'flex'}}>
                         <IonIcon icon={wallet} style={{width:'20px', height:'20px'}} />
                         <span style={{marginLeft:'4px'}}>Wallet</span>
                       </div>
                     </div>
-                    <img src="" />
                 </div>
+              </IonRouterLink>
             </IonCardContent>
         </IonCard>
         

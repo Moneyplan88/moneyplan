@@ -1,6 +1,6 @@
 import { IonIcon, IonLabel, IonRouterOutlet, IonTabs, IonTabButton, IonTabBar} from "@ionic/react"
 import { Route, Redirect } from "react-router";
-import { home, search, heart } from 'ionicons/icons';
+import { home, podium, receipt } from 'ionicons/icons';
 
 import Home from './home/Home';
 import Dashboard from './dashboard/Dashboard';
@@ -21,11 +21,11 @@ const Tabs = () => {
                     <IonLabel>Home</IonLabel>
                 </IonTabButton>
                 <IonTabButton tab="search" href="/tabs/transaction">
-                    <IonIcon icon={search} />
+                    <IonIcon icon={receipt} />
                     <IonLabel>Transaction</IonLabel>
                 </IonTabButton>
                 <IonTabButton tab="plan" href="/tabs/dashboard">
-                    <IonIcon icon={heart} />
+                    <IonIcon icon={podium} />
                     <IonLabel>Dashboard</IonLabel>
                 </IonTabButton>
             </IonTabBar>
