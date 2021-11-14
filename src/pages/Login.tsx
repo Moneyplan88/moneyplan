@@ -1,5 +1,5 @@
 import {IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar, useIonLoading, useIonToast } from '@ionic/react';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { urlLogin } from '../data/Urls';
 import UserContext from '../data/user-context';
@@ -12,10 +12,13 @@ const Login: React.FC = () => {
   const history = useHistory()
   const userContext = useContext(UserContext)
 
-  // TODO: Redirect user if token already exists 
-  // if(userContext.token != ''){
-  //   history.push('/wallet')
-  // }
+  useEffect(() => {
+    if(userContext.token != ''){
+      history.push('/tabs')
+    }else{
+      console.info("no token")
+    }
+  }, [userContext])
 
   const [showLoader, hideLoader] = useIonLoading()
 
@@ -63,7 +66,7 @@ const Login: React.FC = () => {
         userContext.storeToken(data.data.token)
 
         // TODO: Redirect to dashboard
-        history.push('/wallet')
+        history.push('/tabs')
       }
       // Gagal login
       else{

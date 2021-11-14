@@ -45,14 +45,11 @@ ion-card {
 .header-card {
     background-color: #013496;
     color: white;
-    /* font-weight: bold; */
-    /* font-size: 20px; */
     display: flex;
-    padding-top: 30px;
-    padding-left: 20px;
-    height: 125px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    padding: 5vh 5vw;
+    height: 23vh;
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
 }
 
 .header-content {
