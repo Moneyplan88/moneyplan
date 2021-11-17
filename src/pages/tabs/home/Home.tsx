@@ -10,6 +10,7 @@ import {
     IonLabel,
     IonRouterLink,
   } from '@ionic/react';
+  
 
   import homeCard from './images-home/home.png';
   import './home.css';

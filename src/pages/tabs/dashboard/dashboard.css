@@ -1,0 +1,63 @@
+.home-card {
+    width: 35vw;
+    max-width: 150px;
+}
+
+.card-container {
+    display: flex;
+    /* border: solid; */
+    align-items: center;
+}
+
+.card-content {
+    margin-left: 30px;
+    width: 65vw;
+}
+
+ion-card {
+    border-radius: 15px;
+}
+
+.card-trans {
+    background-color: #b3aeae;
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.value-trans {
+    margin-left: 140px;
+    margin-top: 5px;
+}
+
+.card-title {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.latest-trans {
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.header-card {
+    background-color: #013496;
+    color: white;
+    display: flex;
+    padding: 5vh 5vw;
+    height: 23vh;
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+    display: flex;
+    align-items: center;
+}
+
+.header-content {
+    margin-left: 20px;
+}
+
+.trans-item{
+    box-shadow: 0 3px 10px  rgb(4 17 60 / 0.5);
+}
