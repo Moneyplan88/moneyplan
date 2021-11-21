@@ -18,6 +18,7 @@ import { bag, chevronForwardOutline, wallet } from 'ionicons/icons';
 import { useContext, useEffect } from 'react';
 import UserContext from '../../../data/user-context';
 import { useHistory } from 'react-router';
+import HomeCard from './components/HomeCard';
 
 const Home = () => {
   const history = useHistory()
@@ -50,23 +51,7 @@ const Home = () => {
     <IonContent>
         <IonCard>
             <IonCardContent>
-              <IonRouterLink routerLink="/wallet">
-                <div className="card-container">
-                    <img className="home-card" src={homeCard}/>
-                    <div className="card-content mx-3">
-                      <div style={{fontSize:'12px', fontWeight:'bold'}}>
-                        Your balance 
-                      </div>
-                      <div style={{fontSize:'24px', fontWeight:'bolder'}}>
-                        Rp. 7.065.000
-                      </div>
-                      <div className="mt-2" style={{display:'flex'}}>
-                        <IonIcon icon={wallet} style={{width:'20px', height:'20px'}} />
-                        <span style={{marginLeft:'4px'}}>Wallet</span>
-                      </div>
-                    </div>
-                </div>
-              </IonRouterLink>
+              <HomeCard />
             </IonCardContent>
         </IonCard>
         

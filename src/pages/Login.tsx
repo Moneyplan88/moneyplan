@@ -59,7 +59,7 @@ const Login: React.FC = () => {
       hideLoader()
 
       // Sukses login
-      if(data.message == "Login success"){
+      if(data.success == true){
         showToast('Login success','success')
 
         // Simpan token

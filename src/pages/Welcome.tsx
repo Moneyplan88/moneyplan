@@ -21,7 +21,7 @@ const Welcome: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen className='ion-padding ion-text-center'>
+      <IonContent className='ion-padding ion-text-center'>
         <IonSlides pager={true} options={slideOpts} ref={slideOptionsRef}>
           <IonSlide>
             <h1 className="h1-onboarding">MoneyPlan</h1>
