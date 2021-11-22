@@ -10,12 +10,10 @@ import {
     IonLabel,
     IonRouterLink,
   } from '@ionic/react';
-  
 
-  import homeCard from './images-home/home.png';
-  import './home.css';
-import { bag, chevronForwardOutline, wallet } from 'ionicons/icons';
-import { useContext, useEffect } from 'react';
+import './home.css';
+import { bag } from 'ionicons/icons';
+import { useContext, useEffect, useState } from 'react';
 import UserContext from '../../../data/user-context';
 import { useHistory } from 'react-router';
 import HomeCard from './components/HomeCard';
@@ -23,12 +21,17 @@ import HomeCard from './components/HomeCard';
 const Home = () => {
   const history = useHistory()
   const userContext = useContext(UserContext)
+  const [name, setName] = useState('')
 
   useEffect(() => {
     if(userContext.token == ''){
       history.push('/login')
     }else{
-      console.info("has token")
+      setName(userContext.user.name as string)
+      // Fetch user info
+      if(name == ''){
+        userContext.fetchInfo()
+      }
     }
   }, [userContext])
 
@@ -42,7 +45,7 @@ const Home = () => {
         </IonRouterLink>
       </div>
       <div className="header-content"> 
-        <div style={{fontSize:'1.2em',fontWeight:'bold'}}>Hi, {userContext.user.name}! </div>
+        <div style={{fontSize:'1.2em',fontWeight:'bold'}}>Hi, {name}! </div>
         <div style={{textAlign: 'left', fontSize:'0.8em'}}>
             Welcome Back!
         </div>

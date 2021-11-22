@@ -6,11 +6,13 @@ const UserContext = React.createContext<{
     user: UserModel
     storeToken: (token: string) => void;
     initContext: () => void,
+    fetchInfo: () => void,
 }>({
     token: '',
     user: {},
     storeToken: () => {},
-    initContext: () => {}
+    initContext: () => {},
+    fetchInfo: () => {},
 })
 
 export default UserContext

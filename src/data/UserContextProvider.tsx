@@ -14,6 +14,23 @@ const UserContextProvider: React.FC = (props) => {
     setToken(token)
   }
 
+  const fetchInfo = async () => {
+    console.log(token)
+    await axios.get(urlUserInfo, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(val => {
+      const userInfo: UserModel = val.data.data
+      setUser(userInfo)
+      console.info(userInfo)
+    }).catch(err => {
+      console.log("error: "+err)
+      // Set back token to null since token is invalid
+      setToken('')
+    }) 
+  }
+
   const initContext = useCallback(async () => {
     const result = await Storage.get({ key: 'token' })
     const tokenRes = result.value ? JSON.parse(result.value) : ''
@@ -21,16 +38,19 @@ const UserContextProvider: React.FC = (props) => {
     setToken(tokenRes)
 
     if (result.value) {
-      const resUserInfo = (
-        await axios.get(urlUserInfo, {
-          headers: {
-            Authorization: `Bearer ${tokenRes}`,
-          },
-        })
-      ).data
-      const userInfo: UserModel = resUserInfo.data
-      setUser(userInfo)
-      console.info(userInfo)
+      await axios.get(urlUserInfo, {
+        headers: {
+          Authorization: `Bearer ${tokenRes}`,
+        },
+      }).then(val => {
+        const userInfo: UserModel = val.data.data
+        setUser(userInfo)
+        console.info(userInfo)
+      }).catch(err => {
+        console.log("error: "+err)
+        // Set back token to null since token is invalid
+        setToken('')
+      }) 
     }
   }, [])
 
@@ -39,7 +59,7 @@ const UserContextProvider: React.FC = (props) => {
   }, [token])
 
   return (
-    <UserContext.Provider value={{ token, user, storeToken, initContext }}>
+    <UserContext.Provider value={{ token, user, storeToken, initContext, fetchInfo }}>
       {props.children}
     </UserContext.Provider>
   )

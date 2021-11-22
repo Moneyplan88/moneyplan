@@ -30,7 +30,8 @@ const HomeCard = () => {
     })
     .then(data => {
       console.log(data)
-      setSaldo(data.length as number)
+      const saldoData = data[0] ?? 0
+      setSaldo(saldoData)
     })
     .catch(err => {
       console.log(err)
