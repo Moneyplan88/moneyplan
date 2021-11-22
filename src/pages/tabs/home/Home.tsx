@@ -18,7 +18,7 @@ import UserContext from '../../../data/user-context';
 import { useHistory } from 'react-router';
 import HomeCard from './components/HomeCard';
 
-const Home = () => {
+const Home: React.FC = () => {
   const history = useHistory()
   const userContext = useContext(UserContext)
   const [name, setName] = useState('')

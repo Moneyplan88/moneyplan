@@ -2,12 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react'
 import UserContext from './user-context'
 import { Storage } from '@capacitor/storage'
 import axios from 'axios'
-import { urlUserInfo } from './Urls'
+import { urlUserInfo, urlWalletList } from './Urls'
 import UserModel from '../model/user.model'
 
 const UserContextProvider: React.FC = (props) => {
   const [token, setToken] = useState('')
   const [user, setUser] = useState({})
+  const [wallet, setWallet] = useState([])
 
   const storeToken = (token: string) => {
     console.log(token)
@@ -28,6 +29,19 @@ const UserContextProvider: React.FC = (props) => {
       console.log("error: "+err)
       // Set back token to null since token is invalid
       setToken('')
+    }) 
+  }
+
+  const fetchWallet = async () => {
+    await axios.get(urlWalletList, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(val => {
+      console.info(val.data)
+      setWallet(val.data.data)
+    }).catch(err => {
+      console.log("error: "+err)
     }) 
   }
 
@@ -59,7 +73,7 @@ const UserContextProvider: React.FC = (props) => {
   }, [token])
 
   return (
-    <UserContext.Provider value={{ token, user, storeToken, initContext, fetchInfo }}>
+    <UserContext.Provider value={{ token, user, wallet, storeToken, initContext, fetchInfo, fetchWallet }}>
       {props.children}
     </UserContext.Provider>
   )

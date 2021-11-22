@@ -6,7 +6,7 @@ import Home from './home/Home';
 import Dashboard from './dashboard/Dashboard';
 import Transaction from './transaction/Transaction';
 
-const Tabs = () => {
+const Tabs: React.FC = () => {
     return(
         <IonTabs>
             <IonRouterOutlet>

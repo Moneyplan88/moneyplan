@@ -33,6 +33,7 @@ import Settings from './pages/Settings';
 import UserContext from './data/user-context';
 import { useContext, useEffect } from 'react';
 import EditSettings from './pages/EditSettings';
+import AddWallet from './pages/wallet/components/AddWallet';
 
 
 const App: React.FC = () => {
@@ -50,6 +51,7 @@ const App: React.FC = () => {
             <Route exact path="/settings" component={Settings} />
             <Route exact path="/settings/edit" component={EditSettings} />
             <Route exact path="/wallet" component={WalletList} />
+            <Route exact path='/wallet/add' component={AddWallet}/>
             {/* <Route exact path='/start' component={Onboarding}/> */}
             <Route exact path='/start' component={Welcome}/>
             <Route exact path='/login' component={Login}/>

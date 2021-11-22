@@ -12,7 +12,7 @@ import UserContext from '../../../../data/user-context';
 import { useHistory } from 'react-router';
 import { urlTrxAll } from '../../../../data/Urls';
 
-const HomeCard = () => {
+const HomeCard: React.FC = () => {
   const history = useHistory()
   const userContext = useContext(UserContext)
   const [saldo, setSaldo] = useState(0)
