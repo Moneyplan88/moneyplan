@@ -24,6 +24,46 @@ const WalletList:React.FC = () => {
             }
         }
     }, [userContext])
+
+    let layout
+    if(userContext.wallet.length > 0){
+        layout = userContext.wallet.map(wallet => {
+            return <IonItemSliding id={wallet.id_user_wallet} style={{marginTop: '15px'}}className="card-wallet mx-0 " >
+                <IonItemOptions side="start">
+                    <IonItemOption color="warning">
+                        <IonIcon icon={create} style={{width:'60px', height:'30px'}}></IonIcon>
+                    </IonItemOption>
+                </IonItemOptions>
+                <IonItemOptions side="end">
+                    <IonItemOption color="danger" >
+                        <IonIcon icon={trash} style={{width:'60px', height:'30px'}}></IonIcon>
+                    </IonItemOption>
+                </IonItemOptions>
+                <IonItem color="primary">
+                    <div >
+                    <div style={{display: "flex", alignContent:"middle", marginTop:'15px'}}>
+                        <div >
+                        <IonLabel style={{
+                            fontSize:'0.8rem',
+                            fontWeight:'bold'
+                        }}>{wallet.wallet_name}</IonLabel>
+                        <p style={{
+                            fontSize: '1.2rem',
+                            marginTop: '8px',
+                            textAlign: 'left',
+                            fontWeight: 'bold',
+                            padding: '0px 0px',
+                            color: 'white'
+                        }}>Rp. {wallet.balance}</p>
+                        </div>
+                    </div>
+                    </div>
+                </IonItem>
+            </IonItemSliding>
+        })
+    }else{
+        layout = <p>No Wallet in yout account</p>
+    }
     
     return(
         <IonPage>
@@ -37,40 +77,7 @@ const WalletList:React.FC = () => {
 
                     <IonList>
                         <div className="w-full justify-content-center mx-3 pb-1" >
-                            {userContext.wallet.map(wallet => {
-                                return <IonItemSliding style={{marginTop: '15px'}}className="card-wallet mx-0 " >
-                                    <IonItemOptions side="start">
-                                        <IonItemOption color="warning">
-                                            <IonIcon icon={create} style={{width:'60px', height:'30px'}}></IonIcon>
-                                        </IonItemOption>
-                                    </IonItemOptions>
-                                    <IonItemOptions side="end">
-                                        <IonItemOption color="danger" >
-                                            <IonIcon icon={trash} style={{width:'60px', height:'30px'}}></IonIcon>
-                                        </IonItemOption>
-                                    </IonItemOptions>
-                                    <IonItem color="primary">
-                                        <div >
-                                        <div style={{display: "flex", alignContent:"middle", marginTop:'15px'}}>
-                                            <div >
-                                            <IonLabel style={{
-                                                fontSize:'0.8rem',
-                                                fontWeight:'bold'
-                                            }}>{wallet.wallet_name}</IonLabel>
-                                            <p style={{
-                                                fontSize: '1.2rem',
-                                                marginTop: '8px',
-                                                textAlign: 'left',
-                                                fontWeight: 'bold',
-                                                padding: '0px 0px',
-                                                color: 'white'
-                                            }}>Rp. {wallet.balance}</p>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </IonItem>
-                                </IonItemSliding>
-                            })}
+                            {layout}
                         </div>      
                     </IonList>
             </IonContent>

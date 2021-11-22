@@ -18,26 +18,32 @@ const HomeCard: React.FC = () => {
   const [saldo, setSaldo] = useState(0)
 
   useEffect(() => {
-    fetch(urlTrxAll,{ 
-      headers: {
-        'Authorization': 'Bearer ' + userContext.token,
-      }
-    }).then(res => {
-      if(res.status != 500){
-        console.log("tdk 500")
-        return res.json()
-      }
-    })
-    .then(data => {
-      console.log(data)
-      const saldoData = data[0] ?? 0
-      setSaldo(saldoData)
-    })
-    .catch(err => {
-      console.log(err)
-      setSaldo(0)
-    })
-    
+    // fetch(urlTrxAll,{ 
+    //   headers: {
+    //     'Authorization': 'Bearer ' + userContext.token,
+    //   }
+    // }).then(res => {
+    //   if(res.status != 500){
+    //     console.log("tdk 500")
+    //     return res.json()
+    //   }
+    // })
+    // .then(data => {
+    //   console.log(data)
+    //   const saldoData = data[0] ?? 0
+    //   setSaldo(saldoData)
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    //   setSaldo(0)
+    // })
+    if(userContext.token == ''){
+      history.push('/login')
+    }else{
+      // Fetch all balance
+      userContext.fetchAllBalance()
+    }
+  
   }, [userContext])
 
   return <IonRouterLink routerLink="/wallet">
@@ -48,7 +54,7 @@ const HomeCard: React.FC = () => {
             Your balance 
           </div>
           <div style={{fontSize:'24px', fontWeight:'bolder'}}>
-            Rp. {saldo}
+            Rp. {userContext.totalBalance}
           </div>
           <div className="mt-2" style={{display:'flex'}}>
             <IonIcon icon={wallet} style={{width:'20px', height:'20px'}} />
