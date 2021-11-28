@@ -2,13 +2,14 @@ import React, { useCallback, useEffect, useState } from 'react'
 import UserContext from './user-context'
 import { Storage } from '@capacitor/storage'
 import axios from 'axios'
-import { urlUserInfo, urlWalletList, urlWalletTotal } from './Urls'
+import { urlCategoryList, urlUserInfo, urlWalletList, urlWalletTotal } from './Urls'
 import UserModel from '../model/user.model'
 
 const UserContextProvider: React.FC = (props) => {
   const [token, setToken] = useState('')
   const [user, setUser] = useState({})
   const [wallet, setWallet] = useState([])
+  const [categories, setCategories] = useState([])
   const [totalBalance, setTotalBalance] = useState(0)
 
   const storeToken = (token: string) => {
@@ -59,6 +60,16 @@ const UserContextProvider: React.FC = (props) => {
     }) 
   }
 
+  const fetchAllCategory = async () => {
+    await axios.get(urlCategoryList).then(val => {
+      console.info(val.data)
+      setCategories(val.data.data)
+    }).catch(err => {
+      console.log("error: "+err)
+    }) 
+  }
+
+
   const initContext = useCallback(async () => {
     const result = await Storage.get({ key: 'token' })
     const tokenRes = result.value ? JSON.parse(result.value) : ''
@@ -91,11 +102,13 @@ const UserContextProvider: React.FC = (props) => {
       user, 
       wallet,
       totalBalance, 
+      categories,
       storeToken, 
       initContext, 
       fetchInfo, 
       fetchWallet,
-      fetchAllBalance, 
+      fetchAllBalance,
+      fetchAllCategory, 
     }}>
       {props.children}
     </UserContext.Provider>

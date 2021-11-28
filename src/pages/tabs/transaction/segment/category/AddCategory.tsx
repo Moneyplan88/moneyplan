@@ -45,18 +45,16 @@ const AddCategory: React.FC= () => {
     .then(data => {
       console.log(data)
       hideLoader()
-      console.log(data.data.message)
 
-      // Sukses login
-      if(data.data.message == "Please use this new token after user update"){
-        showToast('Change profile success','success')
-
-        // TODO: Redirect to dashboard
-        history.push('/tabs')
+      // Sukses
+      if(data.success == true){
+        showToast('Successfully add new category','success')
+        history.goBack()
       }
-      // Gagal login
+      // Gagal
       else{
-        showToast(data.errors.message,'danger')
+        hideLoader()
+        showToast('Failed to add new category','danger')
       }
     })
     .catch(_ => {

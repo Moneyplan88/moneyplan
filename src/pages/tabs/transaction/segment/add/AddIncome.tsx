@@ -49,8 +49,8 @@ import {
                 </IonSelect>
               </IonItem>
 
-              <IonButton class="ion-item ion-button" onClick={addTransaction} routerLink="/addCategory">
-                Add new category
+              <IonButton class="ion-item ion-button" routerLink="/category">
+                Manage Category
               </IonButton>
 
               <IonItem class="ion-item">
