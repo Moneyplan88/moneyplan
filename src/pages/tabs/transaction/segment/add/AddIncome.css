@@ -1,0 +1,8 @@
+.ion-item{
+    margin: 5%;
+}
+
+.ion-button{
+    display: flex;
+    justify-content: center;
+}

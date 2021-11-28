@@ -73,6 +73,10 @@ const Login: React.FC = () => {
         showToast(data.errors.message,'danger')
       }
     })
+    .catch(_ => {
+      hideLoader()
+      showToast('An error occured during logged you in','danger')
+    })
   }
 
   let layout

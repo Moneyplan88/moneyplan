@@ -13,8 +13,10 @@ import {
   } from '@ionic/react';
 
   import React, {useState} from 'react';
+  import './AddIncome.css'
   
-  const AddIncome = () => {
+  const AddIncome: React.FC<{type: string}> = props => {
+    const {type} = props
     const [label, setLabel] = useState('')
     const [amount, setAmount] = useState(0)
     const [category, setCategory] = useState('')
@@ -27,38 +29,43 @@ import {
 
     return (
       <IonPage>
-        <IonList>
-            <IonItem style={{margin: '5%'}}>
-              <IonLabel position="floating">Enter Input</IonLabel>
-              <IonInput value={label} onIonChange={e => setLabel(e.detail.value!)}></IonInput>
-            </IonItem>
+        <IonContent>
+          <IonList>
+              <IonItem class="ion-item">
+                <IonLabel position="floating">Enter Input</IonLabel>
+                <IonInput value={label} onIonChange={e => setLabel(e.detail.value!)}></IonInput>
+              </IonItem>
 
-            <IonItem style={{margin: '5%'}}>
-              <IonLabel position="floating">Enter Amount</IonLabel>
-              <IonInput type='number' value={amount} onIonChange={e => setAmount(e.detail.value as unknown as number)}></IonInput>
-            </IonItem>
+              <IonItem class="ion-item">
+                <IonLabel position="floating">Enter Amount</IonLabel>
+                <IonInput type='number' value={amount} onIonChange={e => setAmount(e.detail.value as unknown as number)}></IonInput>
+              </IonItem>
 
-            <IonItem style={{margin: '5%'}}>
-              <IonLabel>Category</IonLabel>
-              <IonSelect value={category} onIonChange={e => setCategory(e.detail.value!)}>
-                <IonSelectOption value="Commerce">Commerce</IonSelectOption>
-                <IonSelectOption value="Shopping">Shopping</IonSelectOption>
-              </IonSelect>
-            </IonItem>
+              <IonItem class="ion-item">
+                <IonLabel>Category</IonLabel>
+                <IonSelect value={category} onIonChange={e => setCategory(e.detail.value!)}>
+                  <IonSelectOption value="Commerce">Commerce</IonSelectOption>
+                  <IonSelectOption value="Shopping">Shopping</IonSelectOption>
+                </IonSelect>
+              </IonItem>
 
-            <IonItem style={{margin: '5%'}}>
-              <IonLabel>Wallet</IonLabel>
-              <IonSelect value={wallet} onIonChange={e => setWallet(e.detail.value!)}>
-                <IonSelectOption value="BCA">BCA</IonSelectOption>
-                <IonSelectOption value="Mandiri">Mandiri</IonSelectOption>
-              </IonSelect>
-            </IonItem>
+              <IonButton class="ion-item ion-button" routerLink="/category">
+                Manage Category
+              </IonButton>
 
-            <IonButton onClick={addTransaction}>
-              Add Income Transaction
-            </IonButton>
+              <IonItem class="ion-item">
+                <IonLabel>Wallet</IonLabel>
+                <IonSelect value={wallet} onIonChange={e => setWallet(e.detail.value!)}>
+                  <IonSelectOption value="BCA">BCA</IonSelectOption>
+                  <IonSelectOption value="Mandiri">Mandiri</IonSelectOption>
+                </IonSelect>
+              </IonItem>
 
+              <IonButton class="ion-item ion-button"  onClick={addTransaction}>
+                Add Income Transaction
+              </IonButton>
           </IonList>
+        </IonContent>
       </IonPage>
     );
   };

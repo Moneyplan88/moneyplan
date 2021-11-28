@@ -82,6 +82,10 @@ const EditSettings: React.FC = () => {
         showToast(data.errors.message,'danger')
       }
     })
+    .catch(_ => {
+      hideLoader()
+      showToast('Failed to change your profile','danger')
+    })
   }
 
   return (
