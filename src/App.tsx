@@ -34,6 +34,7 @@ import UserContext from './data/user-context';
 import { useContext, useEffect } from 'react';
 import EditSettings from './pages/EditSettings';
 import AddWallet from './pages/wallet/components/AddWallet';
+import AddCategory from './pages/tabs/transaction/segment/add/AddCategory';
 
 
 const App: React.FC = () => {
@@ -58,6 +59,7 @@ const App: React.FC = () => {
             <Route exact path='/register' component={Register}/>
             <Route exact path='/addTransaction' component={AddTransaction}/>
             <Route exact path='/editTransaction' component={EditTransaction}/>
+            <Route exact path='/addCategory' component={AddCategory}/>
             <Route path="/tabs" component={Tabs} />
             <Redirect exact from='/' to='/start'/>
           </IonRouterOutlet>

@@ -75,7 +75,10 @@ const Register: React.FC = () => {
       else {
         showToast(data.errors.message, 'danger')
       }
-      
+    })
+    .catch(_ => {
+      hideLoader()
+      showToast('An error occured when trying to register','danger')
     })
   }
 
