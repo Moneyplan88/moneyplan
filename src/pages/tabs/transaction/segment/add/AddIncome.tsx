@@ -15,7 +15,8 @@ import {
   import React, {useState} from 'react';
   import './AddIncome.css'
   
-  const AddIncome: React.FC= () => {
+  const AddIncome: React.FC<{type: string}> = props => {
+    const {type} = props
     const [label, setLabel] = useState('')
     const [amount, setAmount] = useState(0)
     const [category, setCategory] = useState('')

@@ -1,10 +1,10 @@
 import { IonContent, IonHeader, IonLabel, IonPage, IonSegment, IonSegmentButton, IonTitle, IonToolbar } from "@ionic/react"
 import { useState } from "react"
 import AddIncome from "./segment/add/AddIncome"
-import AddExpense from "./segment/add/AddExpense"
 
 const AddTransaction:React.FC = () => {
-    const [selected,setSelected] = useState<string>('Income')
+    const [type,setType] = useState<'income'|'expense'>('income')
+
     return(
         <IonPage>
              <IonHeader style={{
@@ -17,31 +17,25 @@ const AddTransaction:React.FC = () => {
                          Add Transaction
                      </IonTitle>
                  </IonToolbar>
-                 <IonSegment value={selected} onIonChange={e => {
+                 <IonSegment value={type} onIonChange={e => {
                      let selectedtemp = e.detail.value
-                     if(selectedtemp === 'Income'){
-                        setSelected(selectedtemp)
-                     } else if(selectedtemp === 'Expense'){
-                        setSelected(selectedtemp)
+                     if(selectedtemp === 'income'){
+                        setType(selectedtemp)
+                     } else if(selectedtemp === 'expense'){
+                        setType(selectedtemp)
                      } 
-                   }} style={{
-                    
-                 }}>
-                    <IonSegmentButton value="Income">
+                   }}>
+                    <IonSegmentButton value="income">
                         <IonLabel>Income</IonLabel>
                     </IonSegmentButton>
-                    <IonSegmentButton value="Expense">
+                    <IonSegmentButton value="expense">
                         <IonLabel>Expense</IonLabel>
                     </IonSegmentButton>
                 </IonSegment>
              </IonHeader>
 
             <IonContent>
-                {selected==='Income' ? (
-                    <AddIncome />
-                ) : selected==='Expense' ? (
-                    <AddExpense />
-                ) : ''}
+                <AddIncome type={type} />
             </IonContent>
         </IonPage>
     )
