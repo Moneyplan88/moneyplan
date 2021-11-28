@@ -1,14 +1,78 @@
-import {IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import React, { useState } from 'react';
+import {IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar, useIonLoading, useIonToast } from '@ionic/react';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+import { urlRegister } from '../data/Urls';
+import UserContext from '../data/user-context';
+
 
 const Register: React.FC = () => {
 const [name, setName] = useState("")
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("")
+const history = useHistory()
+const [showLoader, hideLoader] = useIonLoading()
+const userContext = useContext(UserContext)
+const [presentToast, dismissToast] = useIonToast()
+
+
+useEffect(() => {
+  if(userContext.token != ''){
+    history.push('/tabs')
+  }else{
+    console.info("no token")
+  }
+}, [userContext])
+
+const showToast = (msg: string, color: ('danger'|'success')) => {    
+  presentToast({
+    buttons: [
+      { text: 'Okay', handler: () => dismissToast() },
+    ],
+    color: color,
+    message: msg,
+    duration: 2000,
+  }) 
+};
 
 const submitRegisterHandler = () => {
-console.info(email)
-console.warn(password)
+  if(name == '') showToast("Name must not be empty", "danger")
+  if(email == '' || !email.includes('@')) showToast('Email is invalid. Please Check Again.','danger')
+  if(password == '') showToast('Password is invalid. Please Check Again.','danger')
+
+  const formData = new FormData()
+  formData.append('email',email)
+  formData.append('password',password)
+  formData.append('name',name)
+
+  showLoader({
+    message: "Loading...",
+    spinner: "circular"
+  })
+
+  axios({
+    method: 'post',
+    url: urlRegister,
+    data: formData
+  }).then(res => {
+    console.log(res)
+    hideLoader()
+    // Sukses login
+    if(res.data.success == true){
+      showToast('User Registered','success')
+
+      // Simpan token
+      userContext.storeToken(res.data.data.token)
+
+      // TODO: Redirect to dashboard
+      history.push('/tabs')
+    }else{
+      showToast(res.data.errors.message,'danger')
+    }
+  }).catch(err => {
+    hideLoader()
+    console.log(err)
+  })
 }
 
 return (
@@ -27,7 +91,7 @@ return (
               <IonCol>
               <IonItem>
                 <IonLabel position="floating" style={{fontWeight:'normal'}}>Name</IonLabel>
-                <IonInput type="text"></IonInput>
+                <IonInput type="text" onIonChange={(e) => setName(e.detail.value!)}></IonInput>
               </IonItem>
               </IonCol>
             </IonRow>
@@ -35,7 +99,7 @@ return (
               <IonCol>
               <IonItem>
                 <IonLabel position="floating" style={{fontWeight:'normal'}}>Email Address</IonLabel>
-                <IonInput type="email"></IonInput>
+                <IonInput type="email" onIonChange={(e) => setEmail(e.detail.value!)}></IonInput>
               </IonItem>
               </IonCol>
             </IonRow>
@@ -44,7 +108,7 @@ return (
               <IonCol>
               <IonItem>
                 <IonLabel position="floating">Password</IonLabel>
-                <IonInput type="password"></IonInput>
+                <IonInput onIonChange={(e) => setPassword(e.detail.value!)}  type="password"></IonInput>
               </IonItem>
               </IonCol>
             </IonRow>

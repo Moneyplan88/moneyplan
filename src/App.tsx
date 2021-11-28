@@ -30,21 +30,38 @@ import EditTransaction from './pages/tabs/transaction/EditTransaction';
 import WalletList from './pages/wallet/walletList';
 import Welcome from './pages/Welcome';
 import Settings from './pages/Settings';
+import UserContext from './data/user-context';
+import { useContext, useEffect } from 'react';
+import EditSettings from './pages/EditSettings';
+import AddWallet from './pages/wallet/components/AddWallet';
+import AddCategory from './pages/tabs/transaction/segment/category/AddCategory';
+import Category from './pages/tabs/transaction/segment/category/Category';
 
 
 const App: React.FC = () => {
+  const userContext = useContext(UserContext)
+  const {initContext} = userContext
+
+  useEffect(() => {
+    initContext()
+  }, [initContext])
+
   return (
     <IonApp>
       <IonReactRouter>
           <IonRouterOutlet id="main">
             <Route exact path="/settings" component={Settings} />
+            <Route exact path="/settings/edit" component={EditSettings} />
             <Route exact path="/wallet" component={WalletList} />
+            <Route exact path='/wallet/add' component={AddWallet}/>
             {/* <Route exact path='/start' component={Onboarding}/> */}
             <Route exact path='/start' component={Welcome}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register}/>
             <Route exact path='/addTransaction' component={AddTransaction}/>
             <Route exact path='/editTransaction' component={EditTransaction}/>
+            <Route exact path='/category' component={Category}/>
+            <Route exact path='/addCategory' component={AddCategory}/>
             <Route path="/tabs" component={Tabs} />
             <Redirect exact from='/' to='/start'/>
           </IonRouterOutlet>

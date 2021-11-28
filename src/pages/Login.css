@@ -1,3 +1,10 @@
 .button-login{
     border-radius: 15px;
+    margin-left: 15vw;
+    margin-right: 15vw;
+}
+
+#content{
+    margin-left: 10vw;
+    margin-right: 10vw;
 }
