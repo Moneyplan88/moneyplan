@@ -41,7 +41,9 @@ const HomeCard: React.FC = () => {
       history.push('/login')
     }else{
       // Fetch all balance
-      userContext.fetchAllBalance()
+      if(userContext.totalBalance == 0){
+        userContext.fetchAllBalance()
+      }
     }
   
   }, [userContext])

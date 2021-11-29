@@ -23,7 +23,6 @@ import {
     const history = useHistory()
     const userContext = useContext(UserContext)
     const [title, setTitle] = useState('')
-    const [types, setType] = useState('')
     const [amount, setAmount] = useState(0)
     const [category, setCategory] = useState('')
     const [description, setDescrition] = useState('')
@@ -44,9 +43,18 @@ import {
     };
 
     useEffect(() => {
+      if(userContext.token == ''){
+        history.push('/login')
+      }else{
+        console.info('use effect')
+        if(userContext.categories.length == 0){
           userContext.fetchAllCategory()
+        }
+        if(userContext.wallet.length == 0){
           userContext.fetchWallet()
-  }, [])
+        }
+      }
+    }, [userContext])
 
     const addIncomeHandler = () => {
       console.info(title)
