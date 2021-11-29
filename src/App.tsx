@@ -63,10 +63,10 @@ const App: React.FC = () => {
             <Route exact path="/wallet" component={WalletList} />
             <Route exact path="/wallet/edit/:id" component={EditWallet} />
             <Route exact path='/wallet/add' component={AddWallet}/>
-            <Route exact path='/wallet/edit' render={(props) => {
+            {/* <Route exact path='/wallet/edit' render={(props) => {
               console.log(props)
               return <EditWallet walletData={props.location.state as Wallet} />
-            }}/>
+            }}/> */}
             {/* <Route exact path='/start' component={Onboarding}/> */}
             <Route exact path='/start' component={Welcome}/>
             <Route exact path='/login' component={Login}/>

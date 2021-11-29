@@ -97,6 +97,7 @@ const UserContextProvider: React.FC = (props) => {
   }
 
   const logoutUser = () => {
+    Storage.clear()
     setToken('')
   }
 
