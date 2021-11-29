@@ -93,7 +93,7 @@ const WalletList:React.FC = () => {
                         <IonIcon icon={trash} onClick={() => deleteHandler(wallet.id_user_wallet)} style={{width:'60px', height:'30px'}}></IonIcon>
                     </IonItemOption>
                 </IonItemOptions>
-                <IonItem color="primary">
+                <IonItem color="primary" onClick={() => history.push(`wallet/${wallet.id_user_wallet}`)}>
                     <div >
                     <div style={{display: "flex", alignContent:"middle", marginTop:'15px'}}>
                         <div >

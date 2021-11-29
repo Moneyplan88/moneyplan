@@ -38,6 +38,7 @@ import AddWallet from './pages/wallet/components/AddWallet';
 import AddCategory from './pages/tabs/transaction/segment/category/AddCategory';
 import Category from './pages/tabs/transaction/segment/category/Category';
 import EditWallet from './pages/wallet/components/EditWallet';
+import DetailWallet from './pages/wallet/components/DetailWallet';
 import UserContextProvider from './data/UserContextProvider';
 import Home from './pages/tabs/home/Home';
 import Transaction from './pages/tabs/dashboard/Dashboard';
@@ -62,6 +63,7 @@ const App: React.FC = () => {
             <Route exact path="/settings/edit" component={EditSettings} />
             <Route exact path="/wallet" component={WalletList} />
             <Route exact path="/wallet/edit/:id" component={EditWallet} />
+            <Route exact path="/wallet/:id" component={DetailWallet} />
             <Route exact path='/wallet/add' component={AddWallet}/>
             {/* <Route exact path='/wallet/edit' render={(props) => {
               console.log(props)
@@ -79,7 +81,7 @@ const App: React.FC = () => {
             <Redirect exact from='/' to='/start'/>
           </IonRouterOutlet>
       </IonReactRouter>
-     
+    
     </IonApp>
   )
 };

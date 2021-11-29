@@ -2,7 +2,7 @@ import React from 'react'
 import Category from '../model/categories.model'
 import UserModel from '../model/user.model'
 import Wallet from '../model/wallet.model'
-import transaction from '../model/income.model'
+import transaction from '../model/transaction.model'
 
 const UserContext = React.createContext<{
     token: string,
