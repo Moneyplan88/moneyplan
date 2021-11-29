@@ -12,12 +12,16 @@ const Settings:React.FC = () => {
     const userContext = useContext(UserContext)
 
     useEffect(() => {
-        if(userContext.token == ''){
-            history.push('/login')
-        }else{
-            console.info("has token")
+        const checkToken = async() => {
+
+            if(await userContext.getToken() === ''){
+                history.push('/login')
+            }else{
+                console.info("has token")
+            }
         }
-    }, [userContext])
+        checkToken()
+    }, [])
     
     const toggleDarkModeHandler = () => {
         // document.body.classList.toggle("dark");

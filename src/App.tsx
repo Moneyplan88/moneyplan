@@ -1,5 +1,6 @@
-import { IonApp, IonRouterOutlet } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonTabs, IonTabBar, IonLabel, IonTabButton, IonIcon } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import {home, receipt, podium} from 'ionicons/icons'
 import './theme/darkMode.css'
 
 /* Core CSS required for Ionic components to work properly */
@@ -36,7 +37,11 @@ import EditSettings from './pages/EditSettings';
 import AddWallet from './pages/wallet/components/AddWallet';
 import AddCategory from './pages/tabs/transaction/segment/category/AddCategory';
 import Category from './pages/tabs/transaction/segment/category/Category';
-
+import EditWallet from './pages/wallet/components/EditWallet';
+import UserContextProvider from './data/UserContextProvider';
+import Home from './pages/tabs/home/Home';
+import Transaction from './pages/tabs/dashboard/Dashboard';
+import Dashboard from './pages/tabs/dashboard/Dashboard';
 
 const App: React.FC = () => {
   const userContext = useContext(UserContext)
@@ -48,11 +53,13 @@ const App: React.FC = () => {
 
   return (
     <IonApp>
+      
       <IonReactRouter>
           <IonRouterOutlet id="main">
             <Route exact path="/settings" component={Settings} />
             <Route exact path="/settings/edit" component={EditSettings} />
             <Route exact path="/wallet" component={WalletList} />
+            <Route exact path="/wallet/edit/:id" component={EditWallet} />
             <Route exact path='/wallet/add' component={AddWallet}/>
             {/* <Route exact path='/start' component={Onboarding}/> */}
             <Route exact path='/start' component={Welcome}/>
@@ -66,6 +73,7 @@ const App: React.FC = () => {
             <Redirect exact from='/' to='/start'/>
           </IonRouterOutlet>
       </IonReactRouter>
+     
     </IonApp>
   )
 };

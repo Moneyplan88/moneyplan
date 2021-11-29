@@ -13,8 +13,10 @@ const Login: React.FC = () => {
   const userContext = useContext(UserContext)
 
   useEffect(() => {
-    if(userContext.token != ''){
-      history.push('/tabs')
+    const token = userContext.getToken()
+    console.log(token)
+    if(token !== ''){
+      history.push('/tabs/home')
     }else{
       console.info("no token")
     }

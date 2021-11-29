@@ -1,17 +1,31 @@
 import {IonButton, IonContent, IonPage, IonRouterLink } from '@ionic/react';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import p1 from './images/onboard-1.png';
 import p2 from './images/onboard-2.png';
 import p3 from './images/onboard-3.png';
 import style from './Onboarding.module.scss'
 import { Button, Row } from 'react-bootstrap';
+import UserContext from '../data/user-context';
+import { useHistory } from 'react-router';
 
 const Onboarding: React.FC = () => {
   const [page, setPage] = useState(1)
-  
+  const userContext = useContext(UserContext)
+  const history = useHistory()
   const continueHandler = () => {
     setPage(page+1);
   }
+
+  useEffect(() => {
+   const checkToken = async() => {
+     if(await userContext.getToken() === ''){
+       history.push('/login')
+     } else {
+       history.push('/tabs/home')
+     }
+   }
+   checkToken()
+  }, [])
 
   let layout
   if(page == 1){

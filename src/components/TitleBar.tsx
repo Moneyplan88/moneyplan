@@ -8,9 +8,9 @@ const TitleBar: React.FC<{title:string, profile:Boolean}> = (props) => {
                 <IonToolbar color="false">
                     <IonButtons slot="start">
                         {isPlatform('ios') ? 
-                            <IonBackButton defaultHref="home" icon={arrowBack} style={{marginLeft: '10px',width:'20px'}}  text="" />
+                            <IonBackButton defaultHref="/tabs/home" icon={arrowBack} style={{marginLeft: '10px',width:'20px'}}  text="" />
                         : 
-                            <IonBackButton defaultHref="home" />}
+                            <IonBackButton defaultHref="/tabs/home" />}
                     </IonButtons>
                     <IonTitle style={{fontWeight: 'bolder'}}>{props.title}</IonTitle>
                     <IonButtons slot="end">

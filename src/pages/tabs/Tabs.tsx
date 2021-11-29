@@ -5,10 +5,12 @@ import { home, podium, receipt } from 'ionicons/icons';
 import Home from './home/Home';
 import Dashboard from './dashboard/Dashboard';
 import Transaction from './transaction/Transaction';
+import UserContextProvider from "../../data/UserContextProvider";
 
 const Tabs: React.FC = () => {
     return(
-        <IonTabs>
+        
+            <IonTabs>
             <IonRouterOutlet>
                 <Redirect exact path="/tabs" to="/tabs/home"/>
                 <Route exact path="/tabs/home" component={Home} />
@@ -30,6 +32,7 @@ const Tabs: React.FC = () => {
                 </IonTabButton>
             </IonTabBar>
         </IonTabs>
+         
     );
 };
 

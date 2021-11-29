@@ -1,5 +1,6 @@
 import {
   IonButton,
+  IonCol,
   IonContent,
   IonGrid,
   IonInput,
@@ -7,6 +8,7 @@ import {
   IonLabel,
   IonList,
   IonPage,
+  IonRow,
   useIonLoading,
   useIonToast,
 } from '@ionic/react';
@@ -71,12 +73,13 @@ const AddWallet: React.FC = () => {
       hideLoader()
       presentToast({
         buttons: [
-          { text: 'Yay!', handler: () => history.push('/wallet') },
+          { text: 'Yay!', handler: () => history.push('/tabs/home') },
         ],
         color: 'success',
         message: 'Success adding new wallet',
         duration: 2000,
       }) 
+      history.push('/tabs/home')
     })
     .catch(err => {
       console.log(err)
@@ -99,10 +102,15 @@ const AddWallet: React.FC = () => {
             <IonLabel position="floating">Starting Balance</IonLabel>
             <IonInput type={'number'} value={saldo} onIonChange={e => setSaldo(e.detail.value as unknown as number)}></IonInput>
           </IonItem>
-          <IonButton onClick={addWalletHandler} className="mt-3">
-            Add New Wallet
-          </IonButton>
+          
         </IonList>
+        <IonRow className="mt-3" style={{display:'flex', justifyContent:'center'}}>
+                <IonCol className="ion-text-center">
+                    <IonButton className="ion-align-self-center" onClick={addWalletHandler} style={{textAlign: 'center'}}>
+                    Edit Wallet
+                    </IonButton>
+                </IonCol>
+            </IonRow>  
       </IonGrid>
     </IonContent>
   </IonPage>

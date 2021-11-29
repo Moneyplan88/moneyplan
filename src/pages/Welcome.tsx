@@ -1,18 +1,33 @@
 import {IonButton, IonCol, IonContent, IonImg, IonPage, IonRouterLink, IonRow, IonSlide, IonSlides } from '@ionic/react';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import p1 from './images/onboard-1.png';
 import p2 from './images/onboard-2.png';
 import p3 from './images/onboard-3.png';
 import style from './Onboarding.module.scss'
 import { Button, Row } from 'react-bootstrap';
 import './Welcome.css';
+import userContext from '../data/user-context';
+import { useHistory } from 'react-router';
+import UserContext from '../data/user-context';
 
 const Welcome: React.FC = () => {
   const slideOptionsRef = useRef<HTMLIonSlidesElement>(null);
-  
+  const userContext = useContext(UserContext)
+  const history = useHistory()
   const continueHandler = () => {
     slideOptionsRef.current?.slideNext();
   }
+
+  useEffect(() => {
+    const checkToken = async() => {
+      if(await userContext.getToken() === ''){
+        console.log('no token')
+      } else {
+        history.push('/tabs/home')
+      }
+    }
+    checkToken()
+   }, [])
 
   const slideOpts = {
     initialSlide: 0,

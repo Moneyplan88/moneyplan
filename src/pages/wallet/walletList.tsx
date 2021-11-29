@@ -1,42 +1,96 @@
-import React, { useContext, useEffect } from "react"
-import {IonItemSliding, IonContent, IonIcon, IonPage, IonItem, IonItemOption, IonItemOptions, IonLabel, IonList, IonFab, IonFabButton} from "@ionic/react"
+import React, { useContext, useEffect, useState } from "react"
+import {IonItemSliding,useIonLoading,useIonToast, IonContent, IonIcon, IonPage, IonItem, IonItemOption, IonItemOptions, IonLabel, IonList, IonFab, IonFabButton} from "@ionic/react"
 import {add, create, trash} from "ionicons/icons"
 import "./walletList.css"
 import TitleBar from "../../components/TitleBar"
 import { useHistory } from "react-router"
 import UserContext from "../../data/user-context"
+import axios from "axios"
 
 const WalletList:React.FC = () => {
     const history = useHistory()
     const userContext = useContext(UserContext)
+    const [token, setToken] = useState("")
+    const [showLoader, hideLoader] = useIonLoading()
+    const [presentToast, dismissToast] = useIonToast()
 
     useEffect(() => {
-        if(userContext.token === ''){
-            history.push('/login')
-        }else{
-            console.info("has token")
-
-            // Fetch wallet if the length is 0
-            if(userContext.wallet.length != 0){
-                userContext.fetchWallet()
+        const checkToken = async() => {
+            showLoader({
+                message: "Loading...",
+                spinner: "circular"
+            })
+            const token = await userContext.getToken()
+            await setToken(token)
+            await userContext.fetchWallet()
+            if(token === ''){
+                hideLoader()
+                history.push('/login')
             }else{
-                console.info("data is not 0")
+                hideLoader()
+                console.info("has token")
+                // Fetch wallet if the length is 0
+                if(userContext.wallet.length === 0){
+                }else{
+                    console.info(userContext.wallet)
+                }
             }
         }
-    }, [userContext])
+        checkToken()
+
+    }, [])
+
+    const showToast = (msg: string, color: ('danger'|'success')) => {    
+        presentToast({
+          buttons: [
+            { text: 'Okay', handler: () => dismissToast() },
+          ],
+          color: color,
+          message: msg,
+          duration: 2000,
+        }) 
+      };
+
+    const deleteHandler = async(id: any) => {
+
+        showLoader({
+            message: "Loading...",
+            spinner: "circular"
+          })
+        axios(`https://moneyplan-api.herokuapp.com/api/wallet/remove?id_user_wallet=${id}`, {
+            method: 'DELETE',
+            headers: {
+              Authorization: `Bearer ${token}` 
+            } 
+            
+        }).then(res => {
+            console.log(res)
+            hideLoader()
+            if(res.data.success===true){
+                window.location.href = '/wallet'
+                showToast('Wallet berhasil didelete','success')
+            } else{
+                showToast(res.data.errors.message,'danger')
+              }
+        }).catch(err => {
+            console.log(err)
+            hideLoader()
+            showToast('An error occured during logged you in','danger')
+          })
+    }
 
     let layout
     if(userContext.wallet.length > 0){
         layout = userContext.wallet.map(wallet => {
-            return <IonItemSliding id={wallet.id_user_wallet} style={{marginTop: '15px'}}className="card-wallet mx-0 " >
+            return <IonItemSliding key={wallet.id_user_wallet} style={{marginTop: '15px'}}className="card-wallet mx-0 " >
                 <IonItemOptions side="start">
                     <IonItemOption color="warning">
-                        <IonIcon icon={create} style={{width:'60px', height:'30px'}}></IonIcon>
+                        <IonIcon icon={create} onClick={() => history.push(`wallet/edit/${wallet.id_user_wallet}`)} style={{width:'60px', height:'30px'}}></IonIcon>
                     </IonItemOption>
                 </IonItemOptions>
                 <IonItemOptions side="end">
                     <IonItemOption color="danger" >
-                        <IonIcon icon={trash} style={{width:'60px', height:'30px'}}></IonIcon>
+                        <IonIcon icon={trash} onClick={() => deleteHandler(wallet.id_user_wallet)} style={{width:'60px', height:'30px'}}></IonIcon>
                     </IonItemOption>
                 </IonItemOptions>
                 <IonItem color="primary">

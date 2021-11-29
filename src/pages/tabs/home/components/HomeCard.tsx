@@ -37,12 +37,17 @@ const HomeCard: React.FC = () => {
     //   console.log(err)
     //   setSaldo(0)
     // })
-    if(userContext.token == ''){
-      history.push('/login')
-    }else{
-      // Fetch all balance
-      userContext.fetchAllBalance()
+
+    const checkToken = async() => {
+
+      if(userContext.getToken() == ''){
+        history.push('/login')
+      }else{
+        // Fetch all balance
+        userContext.fetchAllBalance()
+      }
     }
+    checkToken()
   
   }, [userContext])
 

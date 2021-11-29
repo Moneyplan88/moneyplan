@@ -24,15 +24,22 @@ const Home: React.FC = () => {
   const [name, setName] = useState('')
 
   useEffect(() => {
-    if(userContext.token == ''){
-      history.push('/login')
-    }else{
-      setName(userContext.user.name as string)
-      // Fetch user info
-      if(name == ''){
-        userContext.fetchInfo()
-      }
+
+    const checkToken = async() => {
+        const token = await userContext.getToken();
+        console.log(token)
+        if(token === ''){
+          history.push('/login')
+        }else{
+          setName(userContext.user.name as string)
+          // Fetch user info
+          if(name === ''){
+            userContext.fetchInfo()
+            // userContext.fetchWallet()
+          }
+      }  
     }
+    checkToken()
   }, [userContext])
 
   return <IonPage>

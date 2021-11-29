@@ -13,15 +13,24 @@ const UserContextProvider: React.FC = (props) => {
   const [totalBalance, setTotalBalance] = useState(0)
 
   const storeToken = (token: string) => {
+    // window.localStorage.setItem('key',token)
     console.log(token)
     setToken(token)
+    Storage.set({ key: 'token', value: JSON.stringify(token) })
+  }
+
+  const getToken = async() => {
+    const result = await Storage.get({ key: 'token' })
+    const tokenRes = result.value ? JSON.parse(result.value) : ''
+    return tokenRes
   }
 
   const fetchInfo = async () => {
-    console.log(token)
+    const {value} = await Storage.get({key: 'token'});
+    console.log(value)
     await axios.get(urlUserInfo, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${JSON.parse(value!)}`,
       },
     }).then(val => {
       const userInfo: UserModel = val.data.data
@@ -30,14 +39,16 @@ const UserContextProvider: React.FC = (props) => {
     }).catch(err => {
       console.log("error: "+err)
       // Set back token to null since token is invalid
-      setToken('')
+      // setToken('')
     }) 
   }
 
   const fetchWallet = async () => {
+    const {value} = await Storage.get({key: 'token'});
+    console.log(value)
     await axios.get(urlWalletList, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${JSON.parse(value!)}`,
       },
     }).then(val => {
       console.info(val.data.data)
@@ -48,9 +59,10 @@ const UserContextProvider: React.FC = (props) => {
   }
 
   const fetchAllBalance = async () => {
+    const {value} = await Storage.get({key: 'token'});
     await axios.get(urlWalletTotal, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${JSON.parse(value!)}`,
       },
     }).then(val => {
       console.info(val.data)
@@ -88,14 +100,14 @@ const UserContextProvider: React.FC = (props) => {
       }).catch(err => {
         console.log("error: "+err)
         // Set back token to null since token is invalid
-        setToken('')
+        Storage.set({ key: 'token', value: '' })
       }) 
     }
   }, [])
 
-  useEffect(() => {
-    Storage.set({ key: 'token', value: JSON.stringify(token) })
-  }, [token])
+  // useEffect(() => {
+  //   Storage.set({ key: 'token', value: JSON.stringify(token) })
+  // }, [token])
 
   return (
     <UserContext.Provider value={{ token, 
@@ -108,7 +120,8 @@ const UserContextProvider: React.FC = (props) => {
       fetchInfo, 
       fetchWallet,
       fetchAllBalance,
-      fetchAllCategory, 
+      fetchAllCategory,
+      getToken
     }}>
       {props.children}
     </UserContext.Provider>

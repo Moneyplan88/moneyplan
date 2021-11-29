@@ -15,6 +15,7 @@ const UserContext = React.createContext<{
     fetchWallet: () => void,
     fetchAllBalance: () => void,
     fetchAllCategory: () => void,
+    getToken: () => any
 }>({
     token: '',
     user: {},
@@ -27,6 +28,7 @@ const UserContext = React.createContext<{
     fetchWallet: () => {},
     fetchAllBalance: () => {},
     fetchAllCategory: () => {},
+    getToken: () => {return ""}
 })
 
 export default UserContext
