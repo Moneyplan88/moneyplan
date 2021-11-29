@@ -1,7 +1,5 @@
 import {
-    IonButtons,
     IonContent,
-    IonHeader,
     IonPage,
     IonList,
     IonItem,
@@ -12,7 +10,6 @@ import {
     IonButton,
     useIonLoading,
     useIonToast,
-    IonItemOption,
   } from '@ionic/react';
 
   import { useContext, useState, useEffect } from 'react';
@@ -20,7 +17,6 @@ import {
   import UserContext from '../../../../../data/user-context';
   import { urlTransactionAdd } from '../../../../../data/Urls';
   import './AddIncome.css'
-import { compassOutline } from 'ionicons/icons';
   
   const AddIncome: React.FC<{type: string}> = props => {
     const {type} = props
@@ -73,7 +69,6 @@ import { compassOutline } from 'ionicons/icons';
       formData.append('type',type)
       formData.append('id_transaction_category',category)
       formData.append('id_user_wallet', wallet)
-      
   
       fetch(urlTransactionAdd,{ 
         method: "POST",
@@ -95,14 +90,14 @@ import { compassOutline } from 'ionicons/icons';
             { text: 'Yay!', handler: () => history.push('/tabs/transaction') },
           ],
           color: 'success',
-          message: 'Success adding new income',
+          message: `Success adding new ${type} transaction`,
           duration: 2000,
         }) 
       })
       .catch(err => {
         console.log(err)
         hideLoader()
-        showToast('Failed adding new income','danger')
+        showToast(`Failed adding new ${type} transaction`,'danger')
       })
       
     }
@@ -110,7 +105,7 @@ import { compassOutline } from 'ionicons/icons';
     let kategori
     if(userContext.categories.length > 0){
         kategori = userContext.categories.map(category => {
-            return <IonSelectOption key={category.id_transaction_category} style={{marginTop: '15px'}} className="card-wallet mx-0 " >
+            return <IonSelectOption key={category.id_transaction_category} value={category.id_transaction_category} style={{marginTop: '15px'}} className="card-wallet mx-0 " >
                       <div>{category.category_name}</div>
                    </IonSelectOption>
         })
@@ -121,7 +116,7 @@ import { compassOutline } from 'ionicons/icons';
     let dompet
     if(userContext.wallet.length > 0){
         dompet = userContext.wallet.map(wallets => {
-            return <IonSelectOption key={wallets.id_user_wallet} style={{marginTop: '15px'}} className="card-wallet mx-0 " >
+            return <IonSelectOption key={wallets.id_user_wallet} value={wallets.id_user_wallet} style={{marginTop: '15px'}} className="card-wallet mx-0 " >
                       <div>{wallets.wallet_name}</div>
                    </IonSelectOption>
         })
@@ -134,25 +129,18 @@ import { compassOutline } from 'ionicons/icons';
         <IonContent>
           <IonList>
               <IonItem class="ion-item">
-                <IonLabel position="floating">Enter Income Title</IonLabel>
+                <IonLabel position="floating">Item</IonLabel>
                 <IonInput value={title} onIonChange={e => setTitle(e.detail.value!)}></IonInput>
               </IonItem>
 
               <IonItem class="ion-item">
-                <IonLabel position="floating">Enter Income Description</IonLabel>
+                <IonLabel position="floating">Description Item</IonLabel>
                 <IonInput value={description} onIonChange={e => setDescrition(e.detail.value!)}></IonInput>
               </IonItem>
 
               <IonItem class="ion-item">
-                <IonLabel position="floating">Enter Amount</IonLabel>
+                <IonLabel position="floating">{type == "income" ? "Amount": "Price"}</IonLabel>
                 <IonInput type='number' value={amount} onIonChange={e => setAmount(e.detail.value as unknown as number)}></IonInput>
-              </IonItem>
-
-              <IonItem class="ion-item">
-                <IonLabel>Type</IonLabel>
-                <IonSelect value={types} onIonChange={e => setType(e.detail.value!)}>
-                  <IonSelectOption value="types">{type}</IonSelectOption>
-                </IonSelect>
               </IonItem>
 
               <IonItem class="ion-item">

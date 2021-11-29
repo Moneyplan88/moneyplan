@@ -4,7 +4,6 @@ import {add, create, trash} from "ionicons/icons"
 import UserContext from '../../../../data/user-context';
 import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import { urlTransactionAdd } from "../../../../data/Urls";
 
 const Income:React.FC = () => {
     const history = useHistory()

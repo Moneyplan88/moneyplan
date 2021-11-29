@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import UserContext from './user-context'
 import { Storage } from '@capacitor/storage'
 import axios from 'axios'
-import { urlCategoryList, urlTransactionAdd, urlIncomeList, urlUserInfo, urlWalletList, urlWalletTotal } from './Urls'
+import { urlCategoryList, urlTransactionAdd, urlTransactionList, urlUserInfo, urlWalletList, urlWalletTotal } from './Urls'
 import UserModel from '../model/user.model'
 
 const UserContextProvider: React.FC = (props) => {
@@ -50,11 +50,15 @@ const UserContextProvider: React.FC = (props) => {
 
   
   const fetchTransaction = async () => {
-    await axios.get(urlTransactionAdd).then(val => {
+    await axios.get(urlTransactionList,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(val => {
       console.info(val.data)
       setTransaction(val.data.data)
     }).catch(err => {
-      console.log("error: "+err)
+      console.log("error fetch trx: "+err)
     }) 
   }
 
