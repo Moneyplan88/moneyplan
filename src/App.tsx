@@ -36,6 +36,8 @@ import EditSettings from './pages/EditSettings';
 import AddWallet from './pages/wallet/components/AddWallet';
 import AddCategory from './pages/tabs/transaction/segment/category/AddCategory';
 import Category from './pages/tabs/transaction/segment/category/Category';
+import EditWallet from './pages/wallet/components/EditWallet';
+import Wallet from './model/wallet.model';
 
 
 const App: React.FC = () => {
@@ -54,6 +56,10 @@ const App: React.FC = () => {
             <Route exact path="/settings/edit" component={EditSettings} />
             <Route exact path="/wallet" component={WalletList} />
             <Route exact path='/wallet/add' component={AddWallet}/>
+            <Route exact path='/wallet/edit' render={(props) => {
+              console.log(props)
+              return <EditWallet walletData={props.location.state as Wallet} />
+            }}/>
             {/* <Route exact path='/start' component={Onboarding}/> */}
             <Route exact path='/start' component={Welcome}/>
             <Route exact path='/login' component={Login}/>
