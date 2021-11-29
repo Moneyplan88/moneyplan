@@ -27,6 +27,11 @@ const Settings:React.FC = () => {
         // document.body.classList.toggle("dark");
     };
 
+    const logoutHandler = () => {
+        userContext.logoutUser()
+        history.push('/login')
+    }
+
     return(
         <IonPage>
             <TitleBar title="Settings" profile={false} />
@@ -64,7 +69,7 @@ const Settings:React.FC = () => {
                             <IonLabel style={{marginLeft:'15px', fontWeight: 'bolder', fontSize:'1em'}}>Dark Mode</IonLabel>
                             <IonToggle color="dark" onIonChange={toggleDarkModeHandler}></IonToggle>
                         </IonItem>
-                        <IonButton color="danger" fill="solid" expand="block"
+                        <IonButton onClick={logoutHandler} color="danger" fill="solid" expand="block"
                             style={{borderRadius: '15px', marginTop: '15px', textAlign:'left'}} className="ion-text-left mx-3">
                             <IonIcon icon={logOut} />
                             <IonLabel style={{marginLeft:'10px', fontWeight: 'bolder', textAlign: 'left'}}>Logout</IonLabel>

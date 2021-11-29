@@ -2,21 +2,18 @@ import { IonContent, IonHeader, IonLabel, IonPage, IonSegment, IonSegmentButton,
 import { useState } from "react"
 import EditIncome from "./segment/edit/EditIncome"
 import EditExpense from "./segment/edit/EditExpense"
+import TitleBar from "../../../components/TitleBar";
 
 const AddTransaction:React.FC = () => {
     const [selected,setSelected] = useState<string>('Income')
     return(
         <IonPage>
+            <TitleBar title="Edit Transaction" profile={true} />
              <IonHeader style={{
                     maxWidth: '414px',
                     alignSelf: 'center',
                     backgroundColor: 'transparent'
                 }}>
-                 <IonToolbar color="false">
-                     <IonTitle>
-                         Edit Transaction
-                     </IonTitle>
-                 </IonToolbar>
                  <IonSegment value={selected} onIonChange={e => {
                      let selectedtemp = e.detail.value
                      if(selectedtemp === 'Income'){

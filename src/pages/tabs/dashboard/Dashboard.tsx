@@ -15,7 +15,7 @@ import {
     IonMenuButton,
   } from '@ionic/react';
   import graphic from './images-dashboard/graphic.png';
-  import TitleBar from "../../../components/TitleBar"
+  import TitleBar from "../../../components/TitleBar";
   import './dashboard.css';
   import { bag, wallet, fastFoodOutline, cashOutline } from 'ionicons/icons';
   

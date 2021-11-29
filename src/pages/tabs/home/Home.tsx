@@ -12,7 +12,7 @@ import {
   } from '@ionic/react';
 
 import './home.css';
-import { bag } from 'ionicons/icons';
+import { add, bag, remove } from 'ionicons/icons';
 import { useContext, useEffect, useState } from 'react';
 import UserContext from '../../../data/user-context';
 import { useHistory } from 'react-router';
@@ -22,6 +22,7 @@ const Home: React.FC = () => {
   const history = useHistory()
   const userContext = useContext(UserContext)
   const [name, setName] = useState('')
+  const [fetched, setFetched] = useState(false)
 
   useEffect(() => {
 
@@ -64,25 +65,16 @@ const Home: React.FC = () => {
               <HomeCard />
             </IonCardContent>
         </IonCard>
-        
-        <div>
-          <p className="latest-trans">Latest Transaction</p>
-            {/* <div className="card-trans">
-              <div className="card-title">Shopping</div>
-              <div className="value-trans">Rp. 25.500.000</div>
-            </div>
-            <div className="card-trans">
-              <div className="card-title">Shopping</div>
-              <div className="value-trans">Rp. 25.500.000</div>
-            </div> */}
-        </div>
-
+        <p className="latest-trans">Latest Transaction</p>
         <IonList className="mx-3">
-          <IonItem style={{borderRadius:'15px'}} lines="none" color="light">
-            <IonIcon slot="start" icon={bag} />
-            <IonLabel style={{fontWeight:'bolder', fontSize:'18px'}}>Shopping</IonLabel>
-            <IonLabel style={{textAlign:'right'}}>Rp 25.500.000</IonLabel>
-          </IonItem>
+          {userContext.transaction.map(trx => {
+            return <IonItem className="ion-item" key={trx.id_transaction} style={{borderRadius:'15px'}} lines="none" color="light">
+              <IonIcon slot="start" icon={trx.type == "income" ? add : remove} />
+              <IonLabel style={{fontWeight:'bolder', fontSize:'18px'}}>{trx.title}</IonLabel>
+              <IonLabel style={{textAlign:'right'}}>Rp {trx.amount}</IonLabel>
+            </IonItem>
+          })}
+          
         </IonList>
 
     </IonContent>

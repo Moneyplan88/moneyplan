@@ -2,13 +2,14 @@ import React, { useCallback, useEffect, useState } from 'react'
 import UserContext from './user-context'
 import { Storage } from '@capacitor/storage'
 import axios from 'axios'
-import { urlCategoryList, urlUserInfo, urlWalletList, urlWalletTotal } from './Urls'
+import { urlCategoryList,urlTransactionList, urlUserInfo, urlWalletList, urlWalletTotal } from './Urls'
 import UserModel from '../model/user.model'
 
 const UserContextProvider: React.FC = (props) => {
   const [token, setToken] = useState('')
   const [user, setUser] = useState({})
   const [wallet, setWallet] = useState([])
+  const [transaction, setTransaction] = useState([])
   const [categories, setCategories] = useState([])
   const [totalBalance, setTotalBalance] = useState(0)
 
@@ -58,6 +59,20 @@ const UserContextProvider: React.FC = (props) => {
     }) 
   }
 
+  
+  const fetchTransaction = async () => {
+    await axios.get(urlTransactionList,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(val => {
+      console.info(val.data)
+      setTransaction(val.data.data)
+    }).catch(err => {
+      console.log("error fetch trx: "+err)
+    }) 
+  }
+
   const fetchAllBalance = async () => {
     const {value} = await Storage.get({key: 'token'});
     await axios.get(urlWalletTotal, {
@@ -81,6 +96,9 @@ const UserContextProvider: React.FC = (props) => {
     }) 
   }
 
+  const logoutUser = () => {
+    setToken('')
+  }
 
   const initContext = useCallback(async () => {
     const result = await Storage.get({ key: 'token' })
@@ -88,7 +106,7 @@ const UserContextProvider: React.FC = (props) => {
     console.info('initing ... ', tokenRes)
     setToken(tokenRes)
 
-    if (result.value) {
+    if (tokenRes != '') {
       await axios.get(urlUserInfo, {
         headers: {
           Authorization: `Bearer ${tokenRes}`,
@@ -113,15 +131,18 @@ const UserContextProvider: React.FC = (props) => {
     <UserContext.Provider value={{ token, 
       user, 
       wallet,
+      transaction,
       totalBalance, 
       categories,
       storeToken, 
       initContext, 
-      fetchInfo, 
+      fetchInfo,
+      fetchTransaction, 
       fetchWallet,
       fetchAllBalance,
       fetchAllCategory,
-      getToken
+      getToken,
+      logoutUser,
     }}>
       {props.children}
     </UserContext.Provider>
