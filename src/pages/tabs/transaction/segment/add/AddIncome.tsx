@@ -43,17 +43,21 @@ import {
     };
 
     useEffect(() => {
-      if(userContext.token == ''){
-        // history.push('/login')
-      }else{
-        console.info('use effect')
-        if(userContext.categories.length == 0){
-          userContext.fetchAllCategory()
-        }
-        if(userContext.wallet.length == 0){
-          userContext.fetchWallet()
+      const checkToken = async() => {
+
+        if(await userContext.getToken() == ''){
+          history.push('/login')
+        }else{
+          console.info('use effect')
+          if(userContext.categories.length == 0){
+            userContext.fetchAllCategory()
+          }
+          if(userContext.wallet.length == 0){
+            userContext.fetchWallet()
+          }
         }
       }
+      checkToken()
     }, [userContext])
 
     const addIncomeHandler = () => {
@@ -170,7 +174,7 @@ import {
               </IonItem>
 
               <IonButton class="ion-item ion-button"  onClick={addIncomeHandler}>
-                Add Income Transaction
+                Add {type == "income" ? "Income": "Expense"} Transaction
               </IonButton>
           </IonList>
         </IonContent>

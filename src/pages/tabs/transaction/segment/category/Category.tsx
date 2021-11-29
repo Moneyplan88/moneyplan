@@ -4,6 +4,7 @@ import {add, create, trash} from "ionicons/icons"
 import UserContext from "../../../../../data/user-context"
 import { useHistory } from "react-router"
 import { urlCategoryDelete } from "../../../../../data/Urls"
+import TitleBar from "../../../../../components/TitleBar"
 
 const Category:React.FC = () => {
     const history = useHistory()
@@ -24,12 +25,16 @@ const Category:React.FC = () => {
     };
 
     useEffect(() => {
-        if(userContext.token == ''){
-            history.push('/login')
-        }else{
-            // Fetch all category
-            userContext.fetchAllCategory()
-        } 
+        const checkToken = async() =>{
+
+            if(await userContext.getToken() == ''){
+                history.push('/login')
+            }else{
+                // Fetch all category
+                userContext.fetchAllCategory()
+            } 
+        }
+        checkToken()
     }, [])
 
     const deleteHandler = async (id: any) => {
@@ -74,7 +79,7 @@ const Category:React.FC = () => {
                         <IonIcon icon={trash} style={{width:'60px', height:'30px'}}></IonIcon>
                     </IonItemOption>
                 </IonItemOptions>
-                <IonItem color="medium">
+                <IonItem color="light">
                     <div style={{display: "flex", alignContent:"middle"}}>
                         <IonLabel style={{
                             fontSize:'0.8rem',
@@ -97,6 +102,7 @@ const Category:React.FC = () => {
                          fontWeight: "bold",
                          marginTop: "10px"
                         }}>Category List </div>
+            <TitleBar profile={true} title={""} />
 
             <IonContent className="container">
                     <IonFab vertical="bottom" horizontal="end">

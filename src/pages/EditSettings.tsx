@@ -70,7 +70,7 @@ function dataURLtoFile(dataurl:any, filename:any) {
   
   return new File([u8arr], filename, {type:mime});
 }
-const b64toBlob = (b64Data:any, contentType='image/png', sliceSize=512) => {
+const b64toBlob = (b64Data:any, contentType='image/jpg', sliceSize=512) => {
   const byteCharacters = atob(b64Data);
   const byteArrays = [];
 
@@ -86,9 +86,11 @@ const b64toBlob = (b64Data:any, contentType='image/png', sliceSize=512) => {
     byteArrays.push(byteArray);
   }
 
-  const blob = new Blob(byteArrays, {type: contentType});
+  const blob = new Blob(byteArrays, {type: contentType} );
   return blob;
 }
+
+
 
 const takePhotoHandler = async() => {
     const photo = Camera.getPhoto({
@@ -117,29 +119,27 @@ const takePhotoHandler = async() => {
     if(password === '') showToast('Password is invalid. Please Check Again.','danger')
     
     
-    let file:any
+    let file:Blob
     let base64:any
     const fileName = new Date().getTime() + '.jpg';
-
-    if(takenPhoto! !== undefined){
-
-      base64 = await base64FromPath(takenPhoto!.preview)
-      file = dataURLtoFile(base64, fileName)
-
-      console.log(file)
-    }
-    // console.log(base64)
-
     const formData = new FormData()
     formData.append('email',email)
     formData.append('password',password)
     formData.append('name',name)
-    formData.append("email_verified_date","")
-    formData.append("dark_mode","")
-    if(file){
-
-      formData.append('photo_user',file)
+    if(takenPhoto! !== undefined){
+      base64 = await base64FromPath(takenPhoto!.preview)
+      var blob = new Blob([base64], {type: 'application/octet-stream'});
+      // const blob = dataURItoBlob(takenPhoto!.path)
+      // file = dataURLtoFile(base64, fileName)
+      console.log(takenPhoto!.preview)
+      // const blob = b64toBlob(base64.replace("data:image/png;base64,", ""))
+      // console.log(file)
+      console.log(blob)
+      formData.append('photo_user',blob as Blob,'gambar1.jpg')
     }
+    // console.log(base64)
+
+  
     
     showLoader({
       message: "Loading...",
