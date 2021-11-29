@@ -11,6 +11,7 @@ const Income:React.FC = () => {
     const userContext = useContext(UserContext)
     const [presentToast, dismissToast] = useIonToast()
     const [showLoader, hideLoader] = useIonLoading()  
+    const [fetched, setFetched] = useState(false)
 
     const showToast = (msg: string, color: ('danger'|'success')) => {    
         presentToast({
@@ -27,7 +28,10 @@ const Income:React.FC = () => {
         if(userContext.token == ''){
             history.push('/login')
         }else{
-            userContext.fetchTransaction()
+            if(userContext.transaction.length == 0 && !fetched){
+                userContext.fetchTransaction()
+                setFetched(true)
+            }
         }
     }, [userContext])
 

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import UserContext from './user-context'
 import { Storage } from '@capacitor/storage'
 import axios from 'axios'
-import { urlCategoryList, urlTransactionAdd, urlTransactionList, urlUserInfo, urlWalletList, urlWalletTotal } from './Urls'
+import { urlCategoryList, urlTransactionList, urlUserInfo, urlWalletList, urlWalletTotal } from './Urls'
 import UserModel from '../model/user.model'
 
 const UserContextProvider: React.FC = (props) => {

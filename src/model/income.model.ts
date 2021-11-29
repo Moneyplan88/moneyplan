@@ -6,4 +6,5 @@ export default interface transaction{
     description?: string
     type?: string
     amount?: number
+    created_at?: Date
 }

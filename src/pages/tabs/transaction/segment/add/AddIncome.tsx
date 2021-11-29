@@ -44,7 +44,7 @@ import {
 
     useEffect(() => {
       if(userContext.token == ''){
-        history.push('/login')
+        // history.push('/login')
       }else{
         console.info('use effect')
         if(userContext.categories.length == 0){
@@ -62,7 +62,7 @@ import {
         showToast('Please Choose the Wallet','danger')
         return
       }
-      if(amount < 0){
+      if(amount <= 0){
         showToast('Please fill the amount','danger')
         return
       }
