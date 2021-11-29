@@ -28,7 +28,7 @@ const Home: React.FC = () => {
 
     const checkToken = async() => {
         const token = await userContext.getToken();
-        console.log(token)
+        // console.log(token)
         if(token === ''){
           history.push('/login')
         }else{
@@ -36,6 +36,7 @@ const Home: React.FC = () => {
           // Fetch user info
           if(name === ''){
             userContext.fetchInfo()
+            userContext.fetchTransaction()
             // userContext.fetchWallet()
           }
       }  
