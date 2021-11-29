@@ -110,7 +110,7 @@ const DetailWallet: React.FC = () => {
             {transactions.map(transaction =>
               <IonItem>
                 <IonAvatar slot="start">
-                  <IonImg src={transaction.type = 'income' ? up : down} />
+                  <IonImg src={transaction.type == 'income' ? up : down} />
                 </IonAvatar>
                 <IonLabel>
                   <h2>{transaction.title}</h2>
