@@ -80,6 +80,9 @@ const UserContextProvider: React.FC = (props) => {
     }) 
   }
 
+  const logoutUser = () => {
+    setToken('')
+  }
 
   const initContext = useCallback(async () => {
     const result = await Storage.get({ key: 'token' })
@@ -87,7 +90,7 @@ const UserContextProvider: React.FC = (props) => {
     console.info('initing ... ', tokenRes)
     setToken(tokenRes)
 
-    if (result.value) {
+    if (tokenRes != '') {
       await axios.get(urlUserInfo, {
         headers: {
           Authorization: `Bearer ${tokenRes}`,
@@ -122,6 +125,7 @@ const UserContextProvider: React.FC = (props) => {
       fetchWallet,
       fetchAllBalance,
       fetchAllCategory, 
+      logoutUser,
     }}>
       {props.children}
     </UserContext.Provider>

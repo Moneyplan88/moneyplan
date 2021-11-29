@@ -18,6 +18,7 @@ const UserContext = React.createContext<{
     fetchAllBalance: () => void,
     fetchAllCategory: () => void,
     fetchTransaction: () => void,
+    logoutUser: () => void,
 }>({
     token: '',
     user: {},
@@ -32,6 +33,7 @@ const UserContext = React.createContext<{
     fetchAllBalance: () => {},
     fetchAllCategory: () => {},
     fetchTransaction: () => {},
+    logoutUser: () => {},
 })
 
 export default UserContext
