@@ -62,7 +62,7 @@ const WalletList:React.FC = () => {
             </IonItemSliding>
         })
     }else{
-        layout = <p>No Wallet in yout account</p>
+        layout = <p style={{textAlign: 'center',}}>No Wallet in your account</p>
     }
     
     return(

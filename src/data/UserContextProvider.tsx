@@ -2,13 +2,14 @@ import React, { useCallback, useEffect, useState } from 'react'
 import UserContext from './user-context'
 import { Storage } from '@capacitor/storage'
 import axios from 'axios'
-import { urlCategoryList, urlUserInfo, urlWalletList, urlWalletTotal } from './Urls'
+import { urlCategoryList, urlTransactionAdd, urlIncomeList, urlUserInfo, urlWalletList, urlWalletTotal } from './Urls'
 import UserModel from '../model/user.model'
 
 const UserContextProvider: React.FC = (props) => {
   const [token, setToken] = useState('')
   const [user, setUser] = useState({})
   const [wallet, setWallet] = useState([])
+  const [transaction, setTransaction] = useState([])
   const [categories, setCategories] = useState([])
   const [totalBalance, setTotalBalance] = useState(0)
 
@@ -34,14 +35,32 @@ const UserContextProvider: React.FC = (props) => {
     }) 
   }
 
+  // const fetchWallet = async () => {
+  //   await axios.get(urlWalletList, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   }).then(val => {
+  //     console.info(val.data.data)
+  //     setWallet(val.data.data)
+  //   }).catch(err => {
+  //     console.log("error: "+err)
+  //   }) 
+  // }
+
   const fetchWallet = async () => {
-    await axios.get(urlWalletList, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }).then(val => {
-      console.info(val.data.data)
+    await axios.get(urlWalletList).then(val => {
+      console.info(val.data)
       setWallet(val.data.data)
+    }).catch(err => {
+      console.log("error: "+err)
+    }) 
+  }
+  
+  const fetchTransaction = async () => {
+    await axios.get(urlTransactionAdd).then(val => {
+      console.info(val.data)
+      setTransaction(val.data.data)
     }).catch(err => {
       console.log("error: "+err)
     }) 
@@ -101,11 +120,13 @@ const UserContextProvider: React.FC = (props) => {
     <UserContext.Provider value={{ token, 
       user, 
       wallet,
+      transaction,
       totalBalance, 
       categories,
       storeToken, 
       initContext, 
-      fetchInfo, 
+      fetchInfo,
+      fetchTransaction, 
       fetchWallet,
       fetchAllBalance,
       fetchAllCategory, 
