@@ -35,27 +35,19 @@ const UserContextProvider: React.FC = (props) => {
     }) 
   }
 
-  // const fetchWallet = async () => {
-  //   await axios.get(urlWalletList, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   }).then(val => {
-  //     console.info(val.data.data)
-  //     setWallet(val.data.data)
-  //   }).catch(err => {
-  //     console.log("error: "+err)
-  //   }) 
-  // }
-
   const fetchWallet = async () => {
-    await axios.get(urlWalletList).then(val => {
-      console.info(val.data)
+    await axios.get(urlWalletList, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(val => {
+      console.info(val.data.data)
       setWallet(val.data.data)
     }).catch(err => {
       console.log("error: "+err)
     }) 
   }
+
   
   const fetchTransaction = async () => {
     await axios.get(urlTransactionAdd).then(val => {
