@@ -124,7 +124,7 @@ const takePhotoHandler = async() => {
     if(takenPhoto! !== undefined){
 
       base64 = await base64FromPath(takenPhoto!.preview)
-      // file = b64toBlob(base64.replace("data:image/png;base64,", ""))
+      file = dataURLtoFile(base64, fileName)
 
       console.log(file)
     }
@@ -138,7 +138,7 @@ const takePhotoHandler = async() => {
     formData.append("dark_mode","")
     if(file){
 
-      formData.append('photo_user',takenPhoto!.preview)
+      formData.append('photo_user',file)
     }
     
     showLoader({
@@ -150,11 +150,12 @@ const takePhotoHandler = async() => {
     // console.log(token2)
     
     axios({ 
-      method: "POST",
+      method: "post",
       data: formData,
       url: urlUserEdit,
       headers: {
         'Authorization': `Bearer ${token2}` ,
+        "content-type": "multipart/form-data",
       }
     })
     .then(data => {
