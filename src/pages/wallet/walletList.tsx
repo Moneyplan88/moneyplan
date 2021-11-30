@@ -108,7 +108,7 @@ const WalletList:React.FC = () => {
                             fontWeight: 'bold',
                             padding: '0px 0px',
                             color: 'white'
-                        }}>Rp. {wallet.balance}</p>
+                        }}>{Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(wallet.balance as number)}                        </p>
                         </div>
                     </div>
                     </div>

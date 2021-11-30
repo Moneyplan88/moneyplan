@@ -22,7 +22,6 @@ const Home: React.FC = () => {
   const history = useHistory()
   const userContext = useContext(UserContext)
   const [name, setName] = useState('')
-  const [fetched, setFetched] = useState(false)
 
   useEffect(() => {
 
@@ -72,7 +71,7 @@ const Home: React.FC = () => {
             return <IonItem className="ion-item" key={trx.id_transaction} style={{borderRadius:'15px'}} lines="none" color="light">
               <IonIcon slot="start" icon={trx.type == "income" ? add : remove} />
               <IonLabel style={{fontWeight:'bolder', fontSize:'18px'}}>{trx.title}</IonLabel>
-              <IonLabel style={{textAlign:'right'}}>Rp {trx.amount}</IonLabel>
+              <IonLabel style={{textAlign:'right'}}>{Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(trx.amount as number)}</IonLabel>
             </IonItem>
           })}
           

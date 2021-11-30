@@ -97,7 +97,7 @@ const DetailTransaction: React.FC = () => {
                 <IonCard className={transaction?.type == 'income' ? 'income-bg' : 'expense-bg'}>
                   <IonCardHeader>
                     <IonCardSubtitle>{transaction?.title}</IonCardSubtitle>
-                    <IonCardTitle>{transaction?.amount}</IonCardTitle>
+                    <IonCardTitle>{Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(transaction?.amount as number)}</IonCardTitle>
                   </IonCardHeader>
                   <IonCardContent className="ion-text-end">
                     {transaction?.description}
