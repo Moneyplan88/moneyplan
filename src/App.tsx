@@ -76,7 +76,7 @@ const App: React.FC = () => {
             <Route exact path='/register' component={Register}/>
             <Route exact path="/transaction/:id" component={DetailTransaction} />
             <Route exact path='/addTransaction' component={AddTransaction}/>
-            <Route exact path='/editTransaction' component={EditTransaction}/>
+            <Route exact path='/editTransaction/:id' component={EditTransaction}/>
             <Route exact path='/category' component={Category}/>
             <Route exact path='/addCategory' component={AddCategory}/>
             <Route path="/tabs" component={Tabs} />

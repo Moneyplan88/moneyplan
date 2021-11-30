@@ -74,7 +74,7 @@ const Income:React.FC = () => {
                     <IonItemOptions side="start">
                         {/* TODO: Edit category */}
                         <IonItemOption color="warning">
-                            <IonIcon icon={create} style={{width:'60px', height:'30px'}}></IonIcon>
+                            <IonIcon icon={create} onClick={() => history.push(`../editTransaction/${trans.id_transaction}`)} style={{width:'60px', height:'30px'}}></IonIcon>
                         </IonItemOption>
                     </IonItemOptions>
                     <IonItemOptions side="end">

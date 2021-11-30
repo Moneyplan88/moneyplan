@@ -1,11 +1,12 @@
 import { IonContent, IonHeader, IonLabel, IonPage, IonSegment, IonSegmentButton, IonTitle, IonToolbar } from "@ionic/react"
 import { useState } from "react"
-import EditIncome from "./segment/edit/EditIncome"
-import EditExpense from "./segment/edit/EditExpense"
 import TitleBar from "../../../components/TitleBar";
+import AddIncome from "./segment/add/AddIncome";
+import EditIncome from "./segment/edit/EditIncome";
 
 const AddTransaction:React.FC = () => {
-    const [selected,setSelected] = useState<string>('Income')
+    const [type,setType] = useState<'income'|'expense'>('income')
+
     return(
         <IonPage>
             <TitleBar title="Edit Transaction" profile={true} />
@@ -14,31 +15,25 @@ const AddTransaction:React.FC = () => {
                     alignSelf: 'center',
                     backgroundColor: 'transparent'
                 }}>
-                 <IonSegment value={selected} onIonChange={e => {
+                 <IonSegment value={type} onIonChange={e => {
                      let selectedtemp = e.detail.value
-                     if(selectedtemp === 'Income'){
-                        setSelected(selectedtemp)
-                     } else if(selectedtemp === 'Expense'){
-                        setSelected(selectedtemp)
+                     if(selectedtemp === 'income'){
+                        setType(selectedtemp)
+                     } else if(selectedtemp === 'expense'){
+                        setType(selectedtemp)
                      } 
-                   }} style={{
-                    
-                 }}>
-                    <IonSegmentButton value="Income">
+                   }}>
+                    <IonSegmentButton value="income">
                         <IonLabel>Income</IonLabel>
                     </IonSegmentButton>
-                    <IonSegmentButton value="Expense">
+                    <IonSegmentButton value="expense">
                         <IonLabel>Expense</IonLabel>
                     </IonSegmentButton>
                 </IonSegment>
              </IonHeader>
 
             <IonContent>
-                {selected==='Income' ? (
-                    <EditIncome />
-                ) : selected==='Expense' ? (
-                    <EditExpense />
-                ) : ''}
+                <EditIncome type={type} />
             </IonContent>
         </IonPage>
     )
