@@ -98,7 +98,7 @@ const DetailWallet: React.FC = () => {
                   <IonImg src="https://d2j6dbq0eux0bg.cloudfront.net/default-store/giftcards/gift_card_003_1500px.jpg" />
                   <IonCardHeader>
                     <IonCardSubtitle>{wallet}</IonCardSubtitle>
-                    <IonCardTitle>{saldo}</IonCardTitle>
+                    <IonCardTitle>{Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(saldo as number)}</IonCardTitle>
                   </IonCardHeader>
                   <IonCardContent></IonCardContent>
                 </IonCard>

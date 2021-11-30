@@ -59,7 +59,7 @@ const HomeCard: React.FC = () => {
             Your balance 
           </div>
           <div style={{fontSize:'24px', fontWeight:'bolder'}}>
-            Rp. {userContext.totalBalance}
+            {Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(userContext.totalBalance as number)}
           </div>
           <div className="mt-2" style={{display:'flex'}}>
             <IonIcon icon={wallet} style={{width:'20px', height:'20px'}} />
