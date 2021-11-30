@@ -74,7 +74,7 @@ const Expense:React.FC = () => {
                     <IonItemOptions side="start">
                         {/* TODO: Edit category */}
                         <IonItemOption color="warning">
-                            <IonIcon icon={create} style={{width:'60px', height:'30px'}}></IonIcon>
+                            <IonIcon icon={create} onClick={() => history.push(`../editTransaction/${trans.id_transaction}`)} style={{width:'60px', height:'30px'}}></IonIcon>
                         </IonItemOption>
                     </IonItemOptions>
                     <IonItemOptions side="end">
@@ -119,85 +119,6 @@ const Expense:React.FC = () => {
                             {layout}
                         </div>      
                     </IonList>
-
-                    {/* <IonList>
-                        <div className="w-full justify-content-center mx-3 pb-1" >   
-                            <IonItemSliding style={{marginTop: '15px'}}className="card-wallet mx-0 " >
-                                <IonItemOptions side="start">
-                                    <IonItemOption color="warning">
-                                        <IonIcon icon={create} style={{width:'60px', height:'30px'}}></IonIcon>
-                                    </IonItemOption>
-                                </IonItemOptions>
-                                <IonItemOptions side="end">
-                                    <IonItemOption color="danger" >
-                                        <IonIcon icon={trash} style={{width:'60px', height:'30px'}}></IonIcon>
-                                    </IonItemOption>
-                                </IonItemOptions>
-
-                                    <IonItem color="medium">
-                                        <div >
-                                        <div style={{display: "flex", alignContent:"middle", marginTop:'15px'}}>
-                                            <div >
-                                            <IonLabel style={{
-                                                fontSize:'0.8rem',
-                                                fontWeight:'bold',
-                                                color: 'black'
-
-                                            }}>Investment</IonLabel>
-                                            <p style={{
-                                                fontSize: '1.2rem',
-                                                marginTop: '8px',
-                                                textAlign: 'left',
-                                                fontWeight: 'bold',
-                                                padding: '0px 0px',
-                                                color: 'black'
-                                            }}>Rp 1.200.000</p>
-                                            </div>
-                                        
-                                        </div>
-                                        </div>
-                                    </IonItem>
-                            </IonItemSliding>
-
-
-
-                            <IonItemSliding style={{marginTop: '15px'}}className="card-wallet mx-0 " >
-                                <IonItemOptions side="start">
-                                    <IonItemOption color="warning">
-                                        <IonIcon icon={create} style={{width:'60px', height:'30px'}}></IonIcon>
-                                    </IonItemOption>
-                                </IonItemOptions>
-                                <IonItemOptions side="end">
-                                    <IonItemOption color="danger" >
-                                        <IonIcon icon={trash} style={{width:'60px', height:'30px'}}></IonIcon>
-                                    </IonItemOption>
-                                </IonItemOptions>
-
-                                    <IonItem color="medium">
-                                        <div >
-                                        <div style={{display: "flex", alignContent:"middle", marginTop:'15px'}}>
-                                            <div >
-                                            <IonLabel style={{
-                                                fontSize:'0.8rem',
-                                                fontWeight:'bold',
-                                                color: 'black'
-
-                                            }}>Freelance</IonLabel>
-                                            <p style={{
-                                                fontSize: '1.2rem',
-                                                marginTop: '8px',
-                                                fontWeight: 'bold',
-                                                padding: '0px 0px',
-                                                color: 'black'
-                                            }}>Rp 5.500.000</p>
-                                            </div>
-                                        
-                                        </div>
-                                        </div>
-                                    </IonItem>
-                            </IonItemSliding>
-                        </div>      
-                    </IonList> */}
             </IonContent>
         </IonPage>
     )
