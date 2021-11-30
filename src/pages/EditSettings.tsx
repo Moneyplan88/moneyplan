@@ -141,7 +141,7 @@ const EditSettings: React.FC = () => {
     formData.append("name", name);
     if (takenPhoto! !== undefined) {
       base64 = await base64FromPath(takenPhoto!.preview);
-      var blob = new Blob([base64], { type: "application/octet-stream" });
+      var blob = new Blob([base64], { type: "image/jpg" });
       // const blob = dataURItoBlob(takenPhoto!.path)
       // file = dataURLtoFile(base64, fileName)
       console.log(takenPhoto!.preview);
@@ -182,7 +182,7 @@ const EditSettings: React.FC = () => {
           userContext.storeToken(data.data.data.token);
 
           // TODO: Redirect to dashboard
-          history.push("/tabs/home");
+         window.location.href="/tabs/home"
         }
         // Gagal login
         else {

@@ -1,23 +1,64 @@
 import {
+  IonBackButton,
+  IonButton,
+  IonButtons,
   IonContent,
   IonHeader,
+  IonIcon,
   IonLabel,
   IonPage,
   IonSegment,
   IonSegmentButton,
   IonTitle,
   IonToolbar,
+  isPlatform,
 } from "@ionic/react";
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Income from "./segment/Income";
 import Expense from "./segment/Expense";
 import TitleBar from "../../../components/TitleBar";
+import { arrowBack, personCircle, ellipsisHorizontal } from "ionicons/icons";
+import { useHistory } from "react-router";
+import UserContext from "../../../data/user-context";
 
 const Transaction: React.FC = () => {
+  const history = useHistory()
+    const userContext = useContext(UserContext)
   const [selected, setSelected] = useState<string>("Income");
+  const [fetched, setFetched] = useState(false)
+  
+  
+  useEffect(() => {
+    const checkToken = async() => {
+
+        if(await userContext.getToken() == ''){
+            history.push('/login')
+        }else{
+            if(userContext.transaction.length == 0 && !fetched){
+                userContext.fetchTransaction()
+                setFetched(true)
+            }
+        }
+    }
+    checkToken()
+}, [userContext])
   return (
     <IonPage>
-      <TitleBar title="Transaction List" profile={true} />
+      {/* <TitleBar title="Transaction List" profile={true} /> */}
+      <IonHeader className="ion-no-border">
+                <IonToolbar color="false">
+                   
+                    <IonTitle style={{fontWeight: 'bolder'}}>Transaction list</IonTitle>
+                    <IonButtons slot="end">
+                        
+                        <IonButton routerLink="/settings">
+                            <IonIcon icon={personCircle} style={{width:'30px', height:'30px'}}/>
+                        </IonButton>
+                        
+                        
+                    </IonButtons>
+                </IonToolbar>
+        </IonHeader>
       <IonHeader
         style={{
           maxWidth: "414px",

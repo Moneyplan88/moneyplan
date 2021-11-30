@@ -13,13 +13,17 @@ const Login: React.FC = () => {
   const userContext = useContext(UserContext)
 
   useEffect(() => {
-    const token = userContext.getToken()
-    console.log(token)
-    if(token !== ''){
-      history.push('/tabs/home')
-    }else{
-      console.info("no token")
+    const checkToken = async() => {
+
+      const token = await userContext.getToken()
+      console.log(token)
+      if(token !== ''){
+        history.push('/tabs/home')
+      }else{
+        console.info("no token")
+      }
     }
+    checkToken()
   }, [userContext])
 
   const [showLoader, hideLoader] = useIonLoading()
@@ -72,6 +76,7 @@ const Login: React.FC = () => {
       }
       // Gagal login
       else{
+        hideLoader()
         showToast(data.errors.message,'danger')
       }
     })

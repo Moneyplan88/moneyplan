@@ -51,7 +51,7 @@ const Home: React.FC = () => {
         <IonRouterLink routerLink="/settings">
           <IonAvatar>
             {console.log(pic)}
-            <img src={pic !== '' ? pic : "/assets/icon/default-profile.png"} />
+            <img src={pic} alt="/assets/icon/default-profile.png" />
           </IonAvatar>
         </IonRouterLink>
       </div>

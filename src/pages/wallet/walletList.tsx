@@ -15,11 +15,11 @@ const WalletList:React.FC = () => {
     const [presentToast, dismissToast] = useIonToast()
 
     useEffect(() => {
+        // showLoader({
+        //     message: "Loading...",
+        //     spinner: "circular"
+        // })
         const checkToken = async() => {
-            showLoader({
-                message: "Loading...",
-                spinner: "circular"
-            })
             const token = await userContext.getToken()
             await setToken(token)
             await userContext.fetchWallet()
@@ -27,8 +27,8 @@ const WalletList:React.FC = () => {
                 hideLoader()
                 history.push('/login')
             }else{
-                hideLoader()
                 console.info("has token")
+                hideLoader()
                 // Fetch wallet if the length is 0
                 if(userContext.wallet.length === 0){
                 }else{
@@ -37,6 +37,7 @@ const WalletList:React.FC = () => {
             }
         }
         checkToken()
+        hideLoader()
 
     }, [])
 

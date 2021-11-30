@@ -13,15 +13,29 @@ import {
     IonTitle,
     IonToolbar,
     IonMenuButton,
+    IonButton,
   } from '@ionic/react';
   import graphic from './images-dashboard/graphic.png';
   import TitleBar from "../../../components/TitleBar";
   import './dashboard.css';
-  import { bag, wallet, fastFoodOutline, cashOutline } from 'ionicons/icons';
+  import { bag, wallet, fastFoodOutline, cashOutline, personCircle } from 'ionicons/icons';
   
-  const Transaction = () => (
+  const Dashboard:React.FC = () => (
     <IonPage>
-      <TitleBar title="Monthly Report" profile={true} />
+      <IonHeader className="ion-no-border">
+                <IonToolbar color="false">
+                   
+                    <IonTitle style={{fontWeight: 'bolder'}}>Monthly Report</IonTitle>
+                    <IonButtons slot="end">
+                        
+                        <IonButton routerLink="/settings">
+                            <IonIcon icon={personCircle} style={{width:'30px', height:'30px'}}/>
+                        </IonButton>
+                        
+                        
+                    </IonButtons>
+                </IonToolbar>
+        </IonHeader>
       <IonContent>
         <IonCard>
             <IonCardContent>
@@ -81,4 +95,4 @@ import {
     </IonPage>
   );
   
-  export default Transaction;
+  export default Dashboard;

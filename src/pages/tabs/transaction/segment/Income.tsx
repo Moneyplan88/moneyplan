@@ -23,17 +23,20 @@ const Income:React.FC = () => {
             duration: 2000,
         }) 
     };
+    // useEffect(() => {
+    //     const checkToken = async() => {
 
-    useEffect(() => {
-        if(userContext.token == ''){
-            history.push('/login')
-        }else{
-            if(userContext.transaction.length == 0 && !fetched){
-                userContext.fetchTransaction()
-                setFetched(true)
-            }
-        }
-    }, [userContext])
+    //         if(await userContext.getToken() == ''){
+    //             history.push('/login')
+    //         }else{
+    //             if(userContext.transaction.length == 0 && !fetched){
+    //                 userContext.fetchTransaction()
+    //                 setFetched(true)
+    //             }
+    //         }
+    //     }
+    //     checkToken()
+    // }, [userContext])
 
     const deleteHandler = async (id: any) => {
         showLoader({
