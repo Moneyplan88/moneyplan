@@ -10,28 +10,6 @@ const AddTransaction:React.FC = () => {
     return(
         <IonPage>
             <TitleBar title="Edit Transaction" profile={true} />
-             <IonHeader style={{
-                    maxWidth: '414px',
-                    alignSelf: 'center',
-                    backgroundColor: 'transparent'
-                }}>
-                 <IonSegment value={type} onIonChange={e => {
-                     let selectedtemp = e.detail.value
-                     if(selectedtemp === 'income'){
-                        setType(selectedtemp)
-                     } else if(selectedtemp === 'expense'){
-                        setType(selectedtemp)
-                     } 
-                   }}>
-                    <IonSegmentButton value="income">
-                        <IonLabel>Income</IonLabel>
-                    </IonSegmentButton>
-                    <IonSegmentButton value="expense">
-                        <IonLabel>Expense</IonLabel>
-                    </IonSegmentButton>
-                </IonSegment>
-             </IonHeader>
-
             <IonContent>
                 <EditIncome type={type} />
             </IonContent>

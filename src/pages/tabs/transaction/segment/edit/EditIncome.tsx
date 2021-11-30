@@ -169,6 +169,7 @@ const EditIncome : React.FC<{type: string}> = props => {
   return (
     <IonPage>
       <IonContent>
+      <div style={{textAlign: 'center', marginTop: '10px', fontSize: '25px'}}>Edit Your Transaction</div>
         <IonList>
             <IonItem class="ion-item">
               <IonLabel position="floating">Item</IonLabel>
