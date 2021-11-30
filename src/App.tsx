@@ -44,6 +44,7 @@ import Home from './pages/tabs/home/Home';
 import Transaction from './pages/tabs/dashboard/Dashboard';
 import Dashboard from './pages/tabs/dashboard/Dashboard';
 import Wallet from './model/wallet.model';
+import DetailTransaction from './pages/tabs/transaction/DetailTransaction';
 
 
 const App: React.FC = () => {
@@ -73,6 +74,7 @@ const App: React.FC = () => {
             <Route exact path='/start' component={Welcome}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register}/>
+            <Route exact path="/transaction/:id" component={DetailTransaction} />
             <Route exact path='/addTransaction' component={AddTransaction}/>
             <Route exact path='/editTransaction' component={EditTransaction}/>
             <Route exact path='/category' component={Category}/>

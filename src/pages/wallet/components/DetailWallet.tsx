@@ -1,8 +1,6 @@
 import {
-  IonButton,
   IonContent,
   IonGrid,
-  IonInput,
   IonItem,
   IonLabel,
   IonList,
@@ -23,7 +21,6 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import UserContext from "../../../data/user-context";
-import { urlWalletAdd, urlWalletEdit } from "../../../data/Urls";
 import TitleBar from "../../../components/TitleBar";
 import axios from "axios";
 import transaction from '../../../model/transaction.model';
@@ -43,6 +40,7 @@ const DetailWallet: React.FC = () => {
 
   useEffect(() => {
     const fetchWalletData = async () => {
+      showLoader();
       const token = await userContext.getToken();
       console.log(token);
 
@@ -68,6 +66,7 @@ const DetailWallet: React.FC = () => {
         setSaldo(wallet.data.data.balance);
         console.log(transactions);
         setTransactions(transactions.data.data);
+        hideLoader();
         
       })).catch((err) => console.log(err));
     };
@@ -108,7 +107,7 @@ const DetailWallet: React.FC = () => {
 
             <IonList>
             {transactions.map(transaction =>
-              <IonItem>
+              <IonItem key={transaction.id_transaction}>
                 <IonAvatar slot="start">
                   <IonImg src={transaction.type == 'income' ? up : down} />
                 </IonAvatar>

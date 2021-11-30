@@ -82,7 +82,7 @@ const Income:React.FC = () => {
                             <IonIcon icon={trash} style={{width:'60px', height:'30px'}}></IonIcon>
                         </IonItemOption>
                     </IonItemOptions>
-                    <IonItem color="medium">
+                    <IonItem color="medium" onClick={() => history.push(`../transaction/${trans.id_transaction}`)}>
                         <div style={{display: "flex", alignContent:"middle"}}>
                             <IonLabel style={{
                                 fontSize:'0.8rem',
