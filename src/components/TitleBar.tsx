@@ -4,7 +4,11 @@ import React from "react"
 
 const TitleBar: React.FC<{title:string, profile:Boolean}> = (props) => {
     return(
-        <IonHeader className="ion-no-border">
+        <IonHeader className="ion-no-border" style={{
+            maxWidth: "414px",
+            alignSelf: "center",
+            backgroundColor: "transparent",
+          }}>
                 <IonToolbar color="false">
                     <IonButtons slot="start">
                         {isPlatform('ios') ? 

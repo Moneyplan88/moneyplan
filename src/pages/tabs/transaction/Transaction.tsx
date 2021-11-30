@@ -45,7 +45,14 @@ const Transaction: React.FC = () => {
   return (
     <IonPage>
       {/* <TitleBar title="Transaction List" profile={true} /> */}
-      <IonHeader className="ion-no-border">
+     
+      <IonHeader
+        style={{
+          maxWidth: "414px",
+          alignSelf: "center",
+          backgroundColor: "transparent",
+        }}
+      >
                 <IonToolbar color="false">
                    
                     <IonTitle style={{fontWeight: 'bolder'}}>Transaction list</IonTitle>
@@ -58,14 +65,6 @@ const Transaction: React.FC = () => {
                         
                     </IonButtons>
                 </IonToolbar>
-        </IonHeader>
-      <IonHeader
-        style={{
-          maxWidth: "414px",
-          alignSelf: "center",
-          backgroundColor: "transparent",
-        }}
-      >
         <IonSegment
           value={selected}
           onIonChange={(e) => {
@@ -87,7 +86,11 @@ const Transaction: React.FC = () => {
         </IonSegment>
       </IonHeader>
 
-      <IonContent>
+      <IonContent  style={{
+          maxWidth: "414px",
+          alignSelf: "center",
+          backgroundColor: "transparent",
+        }}>
         {selected === "Income" ? (
           <Income />
         ) : selected === "Expense" ? (

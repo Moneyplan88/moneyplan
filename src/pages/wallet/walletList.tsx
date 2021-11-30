@@ -123,7 +123,11 @@ const WalletList:React.FC = () => {
     return(
         <IonPage>
             <TitleBar title="Your Wallet" profile={true} />
-            <IonContent className="container">
+            <IonContent className="container" style={{
+          maxWidth: "414px",
+          alignSelf: "center",
+          backgroundColor: "transparent",
+        }}>
                     <IonFab vertical="bottom" horizontal="end" slot="fixed">
                         <IonFabButton routerLink="/wallet/add">
                             <IonIcon icon={add} />
