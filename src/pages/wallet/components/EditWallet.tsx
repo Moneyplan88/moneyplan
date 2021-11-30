@@ -46,7 +46,7 @@ import {
 
         // console.log(token)
         console.log(id)
-        axios(`https://moneyplan-api.herokuapp.com/api/wallet/info?id_user_wallet=${id}`, {
+        axios(`https://mymoney.icedicey.com/api/wallet/info?id_user_wallet=${id}`, {
             method: 'get',
             headers: {
               Authorization: `Bearer ${token}` 

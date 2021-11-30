@@ -55,8 +55,8 @@ const DetailWallet: React.FC = () => {
       }
 
       axios.all([
-        axios.get(`https://moneyplan-api.herokuapp.com/api/wallet/info?id_user_wallet=${id}`, options), 
-        axios.get(`https://moneyplan-api.herokuapp.com/api/transaction/user-transaction?id_user_wallet=${id}`, options)
+        axios.get(`https://mymoney.icedicey.com/api/wallet/info?id_user_wallet=${id}`, options), 
+        axios.get(`https://mymoney.icedicey.com/api/transaction/user-transaction?id_user_wallet=${id}`, options)
       ])
       .then(axios.spread((wallet, transactions) => {
         

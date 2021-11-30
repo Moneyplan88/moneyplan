@@ -57,7 +57,7 @@ const WalletList:React.FC = () => {
             message: "Loading...",
             spinner: "circular"
           })
-        axios(`https://moneyplan-api.herokuapp.com/api/wallet/remove?id_user_wallet=${id}`, {
+        axios(`https://mymoney.icedicey.com/api/wallet/remove?id_user_wallet=${id}`, {
             method: 'DELETE',
             headers: {
               Authorization: `Bearer ${token}` 
