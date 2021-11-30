@@ -22,6 +22,7 @@ const Home: React.FC = () => {
   const history = useHistory()
   const userContext = useContext(UserContext)
   const [name, setName] = useState('')
+  const [pic, setPic] = useState('')
 
   useEffect(() => {
 
@@ -32,6 +33,7 @@ const Home: React.FC = () => {
           history.push('/login')
         }else{
           setName(userContext.user.name as string)
+          setPic('https://mymoney.icedicey.com/' + userContext.user.photo_user)
           // Fetch user info
           if(name === ''){
             userContext.fetchInfo()
@@ -48,7 +50,8 @@ const Home: React.FC = () => {
       <div>
         <IonRouterLink routerLink="/settings">
           <IonAvatar>
-            <img src="/assets/icon/default-profile.png" />
+            {console.log(pic)}
+            <img src={pic !== '' ? pic : "/assets/icon/default-profile.png"} />
           </IonAvatar>
         </IonRouterLink>
       </div>

@@ -40,7 +40,7 @@ const Settings:React.FC = () => {
                     <IonGrid>
                         <div style={{display: 'flex', justifyContent: 'center', width:'full', height:'17%'}}>
                             <IonAvatar style={{height:'100%',width:'105px', backgroundColor: 'transparent'}}>
-                                <img src={userContext.user.photo_user ? userContext.user.photo_user : "/assets/icon/default-profile.png" }/>
+                                <img src={userContext.user.photo_user ? 'https://mymoney.icedicey.com/' + userContext.user.photo_user : "/assets/icon/default-profile.png" }/>
                             </IonAvatar>
                         </div>
                         {/* <IonRow>

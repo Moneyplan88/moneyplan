@@ -68,7 +68,7 @@ const Login: React.FC = () => {
         userContext.storeToken(data.data.token)
 
         // TODO: Redirect to dashboard
-        history.push('/tabs')
+        history.push('/tabs/home')
       }
       // Gagal login
       else{
