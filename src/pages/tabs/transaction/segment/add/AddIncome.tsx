@@ -10,7 +10,9 @@ import {
   IonButton,
   useIonLoading,
   useIonToast,
+  IonIcon
 } from '@ionic/react';
+import {cameraOutline} from 'ionicons/icons';
 
 import { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
@@ -163,6 +165,12 @@ const AddIncome: React.FC<{type: string}> = props => {
             </IonItem>
 
             <IonButton class="ion-item ion-button" routerLink="/category">
+              Manage Category
+            </IonButton>
+            <IonButton class="ion-item ion-button" routerLink="/category">
+              <IonIcon icon={cameraOutline}>
+
+              </IonIcon>
               Manage Category
             </IonButton>
 

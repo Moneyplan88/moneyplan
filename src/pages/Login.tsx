@@ -101,13 +101,21 @@ const Login: React.FC = () => {
   }else{
     layout = (
       <React.Fragment>
-        <IonHeader>
+        <IonHeader  style={{
+          maxWidth: "414px",
+          alignSelf: "center",
+          backgroundColor: "transparent",
+        }}>
           <IonToolbar color="primary">
             <IonTitle style={{fontWeight:'bold'}}>Login</IonTitle>
           </IonToolbar>
         </IonHeader>
 
-        <IonContent>
+        <IonContent  style={{
+          maxWidth: "414px",
+          alignSelf: "center",
+          backgroundColor: "transparent",
+        }}>
           <IonGrid id="content">
             <IonRow>
               <IonCol>

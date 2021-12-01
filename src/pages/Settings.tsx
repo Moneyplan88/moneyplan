@@ -24,7 +24,7 @@ const Settings:React.FC = () => {
     }, [])
     
     const toggleDarkModeHandler = () => {
-        // document.body.classList.toggle("dark");
+        document.body.classList.toggle("dark");
     };
 
     const logoutHandler = () => {

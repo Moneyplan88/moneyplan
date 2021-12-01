@@ -64,7 +64,11 @@ const Home: React.FC = () => {
         </div>
       </div>
     </div>
-    <IonContent>
+    <IonContent   style={{
+          maxWidth: "414px",
+          alignSelf: "center",
+          backgroundColor: "transparent",
+        }}>
         <IonCard>
             <IonCardContent>
               <HomeCard />
