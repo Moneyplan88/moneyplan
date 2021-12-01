@@ -29,6 +29,16 @@ import {
   import empty from '../../images/empty.png';
   import transaction from '../../../model/transaction.model';
 
+  import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
+
   import { Bar } from 'react-chartjs-2';
   import moment from 'moment';
 
@@ -38,6 +48,59 @@ import {
     const [spending, setSpending] = useState<any[]>([])
     const [transactions, setTransactions] = useState<Array<transaction>>([]);
     const [amount, setAmount] = useState(0)
+    const [data, setData] = useState<any>()
+    const [income, setIncome] = useState([])
+    const [up, setUp] = useState<any[]>([])
+    const [down, setDown] = useState<any[]>([])
+
+    ChartJS.register(
+      CategoryScale,
+      LinearScale,
+      BarElement,
+      Title,
+      Tooltip,
+      Legend
+    );
+
+    const mapLabel = async(trx: transaction[]) => {
+      let labels = new Set<string>()
+      trx.map((item: transaction) => {
+        labels.add(moment(item.created_at!.toLocaleString('default', { month: 'long' }).substring(5, 7)).format("MMMM"))
+      })
+      let temp: string[] = []
+      labels.forEach(v => temp.push(v))
+      return temp
+    }
+
+    const mapExpenses = async(labels: string[], trx: transaction[]) => {
+      let expenses: number[] = []
+      let expense: number
+      labels.forEach(item => {
+        expense = 0
+        trx.filter((item: transaction) => item.type == 'income').forEach((tx: transaction) => {
+          if (item == moment(tx.created_at!.toLocaleString('default', { month: 'long' }).substring(5, 7)).format("MMMM")) {
+            expense += tx.amount ?? 0
+          }
+        })
+        expenses.push(expense)
+      })
+      return expenses
+    }
+
+    const mapIncomes = async(labels: string[], trx: transaction[]) => {
+      let incomes: number[] = []
+      let income: number
+      labels.forEach(item => {
+        income = 0
+        trx.filter((item: transaction) => item.type == 'expense').forEach((tx: transaction) => {
+          if (item == moment(tx.created_at!.toLocaleString('default', { month: 'long' }).substring(5, 7)).format("MMMM")) {
+            income += tx.amount ?? 0
+          }
+        })
+        incomes.push(income)
+      })
+      return incomes
+    }
 
     useEffect(() => {
       const checkToken = async() => {
@@ -59,11 +122,63 @@ import {
             axios.get(`https://mymoney.icedicey.com/api/transaction/user-transaction-top-spending?year=${year}&month=${month}`, options), 
             axios.get(`https://mymoney.icedicey.com/api/transaction/user-transaction`, options)
           ])
-          .then(axios.spread((top, transactions) => {
+          .then(axios.spread(async (top, trans) => {
             console.log(top)
             setSpending(top.data.data)
-            setTransactions(transactions.data.data)
+            setTransactions(trans.data.data)
             console.log(transactions)
+
+            let labels = await mapLabel(transactions)
+
+            let incomes = await mapIncomes(labels, transactions)
+
+            let expenses = await mapExpenses(labels, transactions)
+
+            // let trx = trans.data.data
+            // let labels = new Set<string>()
+            // trx.map((item: transaction) => {
+            //   labels.add(moment(item.created_at!.toLocaleString('default', { month: 'long' }).substring(5, 7)).format("MMMM"))
+            // })
+
+            // let temp: string[] = []
+            // labels.forEach(v => temp.push(v))
+
+            // let expenses: number[] = []
+            // let incomes: number[] = []
+
+            // let income: number, expense: number
+            // labels.forEach(item => {
+            //   income = 0
+            //   trx.filter((item: transaction) => item.type == 'expense').forEach((tx: transaction) => {
+            //     if (item == moment(tx.created_at!.toLocaleString('default', { month: 'long' }).substring(5, 7)).format("MMMM")) {
+            //       income += tx.amount ?? 0
+            //     }
+            //   })
+            //   incomes.push(income)
+            //   expense = 0
+            //   trx.filter((item: transaction) => item.type == 'income').forEach((tx: transaction) => {
+            //     if (item == moment(tx.created_at!.toLocaleString('default', { month: 'long' }).substring(5, 7)).format("MMMM")) {
+            //       expense += tx.amount ?? 0
+            //     }
+            //   })
+            //   expenses.push(expense)
+            // })
+            const result = {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'Income',
+                  data: incomes,
+                  backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                },
+                {
+                  label: 'Expense',
+                  data: expenses,
+                  backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                }
+              ]
+            }
+            setData(result)
           })).catch((err) => console.log(err));
 
           // await axios({
@@ -84,48 +199,6 @@ import {
       checkToken()
     }, [userContext])
 
-    let labels = new Set()
-    transactions.map(item => {
-      labels.add(moment(item.created_at!.toLocaleString('default', { month: 'long' }).substring(5, 7)).format("MMMM"))
-    })
-
-    let expenses: number[] = []
-    let incomes: number[] = []
-
-    let income, expense
-    labels.forEach(item => {
-      income = 0
-      transactions.filter(item => item.type == 'expense').forEach(tx => {
-        if (item == moment(tx.created_at!.toLocaleString('default', { month: 'long' }).substring(5, 7)).format("MMMM")) {
-          income =+ tx.amount
-        }
-      })
-      incomes.push(temp)
-      expense = 0
-      transactions.filter(item => item.type == 'income').forEach(tx => {
-        if (item == moment(tx.created_at!.toLocaleString('default', { month: 'long' }).substring(5, 7)).format("MMMM")) {
-          expense =+ tx.amount
-        }
-      })
-      expenses.push(temp)
-    })
-
-    const data = {
-      labels,
-      datasets: [
-        {
-          label: 'Income',
-          data: incomes,
-          backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-        {
-          label: 'Expense',
-          data: expenses,
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        }
-      ]
-    }
-
     const options = {
       responsive: true,
       plugins: {
@@ -144,12 +217,16 @@ import {
        let total = 0
        for(let i = 0; i < spending.length;i++){
          if(spending[i].type === "expense"){
-             
               total -= spending[i].amount
               console.log(total)
+              // setUp((curr: any) => {
+              //   return curr.push(spending[i])
+              // })
          } else {
-          
            total += spending[i].amount
+          //  setDown((curr: any) => {
+          //   return curr.push(spending[i])
+          // })
          }
         console.log(spending[i])
        }
@@ -168,6 +245,7 @@ import {
       )
     }else{
       layout = spending.map(spend => {
+        console.log(spend)
         if(spend.type === "expense"){
           return(
             <IonList className="mx-3" key={spend.id_transaction}>
@@ -182,8 +260,35 @@ import {
       })
     }
 
+    let layoutIncome
+    if(income.length == 0){
+      layoutIncome = (
+        <div>
+          <img className="justify-content-center" src={empty} alt="No Income" />
+          <h4 className="align-center">No income found.</h4>
+        </div>
+      )
+    }else{
+      layoutIncome = spending.map(spend => {
+        console.log(spend)
+        if(spend.type === "income"){
+          return(
+          <IonList className="mx-3">
+            <IonItem style={{borderRadius:'15px'}} lines="none" color="light">
+              <IonIcon slot="start" icon={cashOutline} />
+              <IonLabel style={{fontWeight:'bolder', fontSize:'18px'}}>{spend.title}</IonLabel>
+              <IonLabel style={{textAlign:'right'}}>{spend.transaction_category}</IonLabel>
+            </IonItem>
+          </IonList>
+          )
+        }
+      })
+    }
+
     return(
       <IonPage>
+
+        {console.log(data)}
         <IonHeader className="ion-no-border">
                   <IonToolbar color="false">
                      
@@ -231,7 +336,7 @@ import {
 
           <IonRow>
             <IonCol>
-              <Bar options={options} data={data} />
+              {data !== undefined ? <Bar options={options} data={data} /> : ''}
             </IonCol>
           </IonRow>
           
@@ -250,24 +355,10 @@ import {
             </IonCol>
           </IonRow>
   
-          {/* <div>
+          <div>
             <p className="latest-trans"><b>Top Income</b></p>
           </div>
-          {spending.map(spend => {
-            if(spend.type === "income"){
-              return(
-
-              <IonList className="mx-3">
-                <IonItem style={{borderRadius:'15px'}} lines="none" color="light">
-                  <IonIcon slot="start" icon={cashOutline} />
-                  <IonLabel style={{fontWeight:'bolder', fontSize:'18px'}}>{spend.title}</IonLabel>
-                  <IonLabel style={{textAlign:'right'}}>{spend.transaction_category}</IonLabel>
-                </IonItem>
-              </IonList>
-              )
-            }
-          })}
-   */}
+            {layoutIncome}
           </IonGrid>
       </IonContent>
       </IonPage>

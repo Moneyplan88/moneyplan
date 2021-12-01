@@ -12,6 +12,7 @@ import {
   IonRow,
   useIonLoading,
   useIonToast,
+  IonAvatar
 } from "@ionic/react";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
@@ -37,12 +38,7 @@ const EditSettings: React.FC = () => {
 
   const [presentToast, dismissToast] = useIonToast();
   const [showLoader, hideLoader] = useIonLoading();
-  async function dataUrlToFile(dataUrl: string, fileName: string): Promise<File> {
 
-    const res: Response = await fetch(dataUrl);
-    const blob: Blob = await res.blob();
-    return new File([blob], fileName, { type: 'image/png' });
-}
   useEffect(() => {
     const checkToken = async () => {
       if ((await userContext.getToken()) === "") {
@@ -73,19 +69,6 @@ const EditSettings: React.FC = () => {
     preview: any;
   }>();
 
-  function dataURLtoFile(dataurl: any, filename: any) {
-    var arr = dataurl.split(","),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      n = bstr.length,
-      u8arr = new Uint8Array(n);
-
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-
-    return new File([u8arr], filename, { type: mime });
-  }
   const b64toBlob = (
     b64Data: any,
     contentType = "image/jpg",
@@ -138,7 +121,6 @@ const EditSettings: React.FC = () => {
     if (password === "")
       showToast("Password is invalid. Please Check Again.", "danger");
 
-    let file: Blob;
     let base64: any;
     const fileName = new Date().getTime() + ".png";
     const formData = new FormData();
@@ -152,29 +134,16 @@ const EditSettings: React.FC = () => {
         path: fileName,
         data: base64,
         directory: Directory.Data
-    })
-      // const blob = dataURItoBlob(takenPhoto!.path)
-      // file = dataURLtoFile(base64, fileName)
+      })
       console.log(takenPhoto!.preview);
       const file = await Filesystem.readFile({
         path: fileName,
         directory: Directory.Data
-    })
-      // const blob = b64toBlob(base64.replace("data:image/png;base64,", ""))
-      // console.log(file)
-      const fileOnly = new File([base64], fileName,{ type: "image/jpg" })
+      })
+      const fileOnly = new File([b64toBlob(file.data)], fileName,{ type: "image/png" })
       console.log(fileOnly)
-      // fetch(base64)
-      //   .then(res => res.blob())
-      //   .then(blob => {
-      //     const newFile = new File([blob], fileName,{ type: "image/jpg" })
-      //     console.info(newFile)
-      //     formData.append("photo_user",newFile)
-      //   })
       formData.append("photo_user",fileOnly)
-      // formData.append("photo_user",await dataUrlToFile(file.data,fileName));
     }
-    // console.log(base64)
 
     showLoader({
       message: "Loading...",
@@ -206,7 +175,7 @@ const EditSettings: React.FC = () => {
           userContext.storeToken(data.data.data.token);
 
           // TODO: Redirect to dashboard
-        //  window.location.href="/tabs/home"
+          window.location.href="/tabs/home"
         }
         // Gagal login
         else {
@@ -227,10 +196,12 @@ const EditSettings: React.FC = () => {
         <IonGrid id="content">
           <IonRow className="ion-text-center">
             <IonCol>
+
               <div className="image-preview-wrapper">
-                <div className="image-preview">
+              <IonAvatar style={{width:'128px',height:'128px'}}>
                   {!takenPhoto ? !photo ? <h3>No photo chosen.</h3> : <img src={'https://mymoney.icedicey.com/' + photo} alt="Preview" /> : <img src={takenPhoto.preview} alt="Preview" />}
-                </div>
+              </IonAvatar>
+                
               </div>
               <IonButton fill="clear" onClick={takePhotoHandler}>
                 <IonIcon slot="start" icon={camera} />
@@ -284,9 +255,7 @@ const EditSettings: React.FC = () => {
           <IonRow className="mt-4">
             <IonCol className="ion-text-center">
               <IonButton
-                expand="block"
-                className="button-login"
-                strong={true}
+               
                 type="submit"
                 onClick={submitChangeProfile}
               >

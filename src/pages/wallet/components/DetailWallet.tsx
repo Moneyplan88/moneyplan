@@ -16,6 +16,7 @@ import {
   IonCardTitle,
   IonCardContent,
   IonAvatar,
+  IonText,
 } from "@ionic/react";
 
 import { useContext, useEffect, useState } from "react";
@@ -24,6 +25,7 @@ import UserContext from "../../../data/user-context";
 import TitleBar from "../../../components/TitleBar";
 import axios from "axios";
 import transaction from '../../../model/transaction.model';
+import empty from '../../images/empty.png';
 
 const DetailWallet: React.FC = () => {
   const history = useHistory();
@@ -32,7 +34,6 @@ const DetailWallet: React.FC = () => {
   const [infoWallet, setInfoWallet] = useState({});
   const [saldo, setSaldo] = useState(0);
   const { id } = useParams<{ id: string }>();
-  const [token, setToken] = useState("");
   const [transactions, setTransactions] = useState<Array<transaction>>([]);
 
   const [presentToast, dismissToast] = useIonToast();
@@ -85,6 +86,28 @@ const DetailWallet: React.FC = () => {
   const down = 'https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-down-icon.png';
   const up = 'https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-up-icon.png';
 
+  let layout 
+  if(transactions.length === 0){
+    layout = (
+      <div>
+        <img id="img-center" src="https://media.istockphoto.com/photos/blank-empty-book-pages-picture-id147877178?k=20&m=147877178&s=170667a&w=0&h=V9XaK5p2gEBUnMdqek4PXeF2wU5k-HSoaBPtl5YB54s=" alt="No History" />
+        <IonText className="align-center">No history found.</IonText>
+      </div>
+    )
+  }else{
+    layout = transactions.map(transaction =>
+      <IonItem key={transaction.id_transaction}>
+        <IonAvatar slot="start">
+          <IonImg src={transaction.type == 'income' ? up : down} />
+        </IonAvatar>
+        <IonLabel>
+          <h2>{transaction.title}</h2>
+          <h3>{Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(transaction.amount as number)}</h3>
+          <h4>{transaction.description}</h4>
+        </IonLabel>
+      </IonItem>)
+  }
+
   return (
     <IonPage>
       <TitleBar title="Edit Wallet" profile={true} />
@@ -106,17 +129,8 @@ const DetailWallet: React.FC = () => {
             </IonRow>
 
             <IonList>
-            {transactions.map(transaction =>
-              <IonItem key={transaction.id_transaction}>
-                <IonAvatar slot="start">
-                  <IonImg src={transaction.type == 'income' ? up : down} />
-                </IonAvatar>
-                <IonLabel>
-                  <h2>{transaction.title}</h2>
-                  <h3>{transaction.amount}</h3>
-                  <h4>{transaction.description}</h4>
-                </IonLabel>
-              </IonItem>)}
+              <h2 className="align-center">Wallet History</h2>
+              {layout}
             </IonList>
 
           </IonGrid>

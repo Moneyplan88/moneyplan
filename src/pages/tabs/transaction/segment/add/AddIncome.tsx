@@ -137,8 +137,6 @@ const AddIncome: React.FC<{type: string}> = props => {
   }
 
   return (
-    <IonPage>
-      <IonContent>
         <IonList>
             <IonItem class="ion-item">
               <IonLabel position="floating">{type == "income" ? "Income Title": "Expense Title"}</IonLabel>
@@ -177,8 +175,6 @@ const AddIncome: React.FC<{type: string}> = props => {
               Add {type == "income" ? "Income": "Expense"} Transaction
             </IonButton>
         </IonList>
-      </IonContent>
-    </IonPage>
   );
 };
 
