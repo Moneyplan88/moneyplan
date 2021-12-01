@@ -16,7 +16,7 @@ import {
   import { useContext, useEffect, useState } from 'react';
   import { useHistory, useParams } from 'react-router';
   import UserContext from '../../../data/user-context';
-  import { urlWalletAdd, urlWalletEdit } from '../../../data/Urls';
+  import { urlWalletAdd, urlWalletEdit, urlWalletInfo } from '../../../data/Urls';
   import TitleBar from '../../../components/TitleBar';
   import axios from 'axios';
   
@@ -46,7 +46,7 @@ import {
 
         // console.log(token)
         console.log(id)
-        axios(`https://mymoney.icedicey.com/api/wallet/info?id_user_wallet=${id}`, {
+        axios(urlWalletInfo+id, {
             method: 'get',
             headers: {
               Authorization: `Bearer ${token}` 

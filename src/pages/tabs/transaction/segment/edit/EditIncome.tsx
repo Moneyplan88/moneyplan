@@ -18,7 +18,7 @@ import React, {useState} from 'react';
 import { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import UserContext from '../../../../../data/user-context';
-import { urlTransactionEdit } from '../../../../../data/Urls';
+import { urlTransactionEdit, urlTransactionInfo } from '../../../../../data/Urls';
 import axios from 'axios';
 
 const EditIncome : React.FC<{type: string}> = props => {
@@ -56,7 +56,7 @@ const EditIncome : React.FC<{type: string}> = props => {
 
       // console.log(token)
       console.log(id)
-      axios(`https://moneyplan-api.herokuapp.com/api/transaction/user-transaction?id_transaction=${id}`, {
+      axios(urlTransactionInfo+id, {
           method: 'get',
           headers: {
             Authorization: `Bearer ${token}` 

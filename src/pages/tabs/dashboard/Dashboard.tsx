@@ -84,6 +84,61 @@ import {
       checkToken()
     }, [userContext])
 
+    let labels = new Set()
+    transactions.map(item => {
+      labels.add(moment(item.created_at!.toLocaleString('default', { month: 'long' }).substring(5, 7)).format("MMMM"))
+    })
+
+    let expenses: number[] = []
+    let incomes: number[] = []
+
+    let income, expense
+    labels.forEach(item => {
+      income = 0
+      transactions.filter(item => item.type == 'expense').forEach(tx => {
+        if (item == moment(tx.created_at!.toLocaleString('default', { month: 'long' }).substring(5, 7)).format("MMMM")) {
+          income =+ tx.amount
+        }
+      })
+      incomes.push(temp)
+      expense = 0
+      transactions.filter(item => item.type == 'income').forEach(tx => {
+        if (item == moment(tx.created_at!.toLocaleString('default', { month: 'long' }).substring(5, 7)).format("MMMM")) {
+          expense =+ tx.amount
+        }
+      })
+      expenses.push(temp)
+    })
+
+    const data = {
+      labels,
+      datasets: [
+        {
+          label: 'Income',
+          data: incomes,
+          backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+        {
+          label: 'Expense',
+          data: expenses,
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        }
+      ]
+    }
+
+    const options = {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top' as const,
+        },
+        title: {
+          display: true,
+          text: 'Monthly Transactions',
+        },
+      },
+    };
+
     useEffect(() => {
      if(spending.length > 0){
        let total = 0
@@ -176,7 +231,7 @@ import {
 
           <IonRow>
             <IonCol>
-              {/* <Bar /> */}
+              <Bar options={options} data={data} />
             </IonCol>
           </IonRow>
           

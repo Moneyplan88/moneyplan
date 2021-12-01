@@ -140,7 +140,7 @@ const EditSettings: React.FC = () => {
 
     let file: Blob;
     let base64: any;
-    const fileName = new Date().getTime() + ".jpg";
+    const fileName = new Date().getTime() + ".png";
     const formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
@@ -162,9 +162,16 @@ const EditSettings: React.FC = () => {
     })
       // const blob = b64toBlob(base64.replace("data:image/png;base64,", ""))
       // console.log(file)
-      const fileOnly = new File([blob], fileName,{ type: "image/jpg" })
-      formData.append("photo_user",fileOnly)
+      const fileOnly = new File([base64], fileName,{ type: "image/jpg" })
       console.log(fileOnly)
+      // fetch(base64)
+      //   .then(res => res.blob())
+      //   .then(blob => {
+      //     const newFile = new File([blob], fileName,{ type: "image/jpg" })
+      //     console.info(newFile)
+      //     formData.append("photo_user",newFile)
+      //   })
+      formData.append("photo_user",fileOnly)
       // formData.append("photo_user",await dataUrlToFile(file.data,fileName));
     }
     // console.log(base64)
@@ -199,7 +206,7 @@ const EditSettings: React.FC = () => {
           userContext.storeToken(data.data.data.token);
 
           // TODO: Redirect to dashboard
-         window.location.href="/tabs/home"
+        //  window.location.href="/tabs/home"
         }
         // Gagal login
         else {

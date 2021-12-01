@@ -6,6 +6,7 @@ import TitleBar from "../../components/TitleBar"
 import { useHistory } from "react-router"
 import UserContext from "../../data/user-context"
 import axios from "axios"
+import { urlWalletDelete } from "../../data/Urls"
 
 const WalletList:React.FC = () => {
     const history = useHistory()
@@ -22,11 +23,7 @@ const WalletList:React.FC = () => {
         const checkToken = async() => {
             const token = await userContext.getToken()
             await setToken(token)
-            // Fetch wallet if the length is 0
-            if(userContext.wallet.length === 0){
-            }else{
-                await userContext.fetchWallet()
-            }
+            await userContext.fetchWallet()
             if(token === ''){
                 hideLoader()
                 history.push('/login')
@@ -57,7 +54,7 @@ const WalletList:React.FC = () => {
             message: "Loading...",
             spinner: "circular"
           })
-        axios(`https://mymoney.icedicey.com/api/wallet/remove?id_user_wallet=${id}`, {
+        axios(urlWalletDelete+id, {
             method: 'DELETE',
             headers: {
               Authorization: `Bearer ${token}` 
