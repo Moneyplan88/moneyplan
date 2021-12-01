@@ -23,6 +23,7 @@ const Home: React.FC = () => {
   const userContext = useContext(UserContext)
   const [name, setName] = useState('')
   const [pic, setPic] = useState('')
+  const [fetched, setFetched] = useState(false)
 
   useEffect(() => {
 
@@ -35,10 +36,11 @@ const Home: React.FC = () => {
           setName(userContext.user.name as string)
           setPic('https://mymoney.icedicey.com/' + userContext.user.photo_user)
           // Fetch user info
-          if(name === ''){
+          if(name === '' && !fetched){
             userContext.fetchInfo()
             userContext.fetchTransaction()
             // userContext.fetchWallet()
+            setFetched(true)
           }
       }  
     }

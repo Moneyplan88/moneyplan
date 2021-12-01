@@ -32,7 +32,7 @@ import WalletList from './pages/wallet/walletList';
 import Welcome from './pages/Welcome';
 import Settings from './pages/Settings';
 import UserContext from './data/user-context';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import EditSettings from './pages/EditSettings';
 import AddWallet from './pages/wallet/components/AddWallet';
 import AddCategory from './pages/tabs/transaction/segment/category/AddCategory';
@@ -50,10 +50,14 @@ import DetailTransaction from './pages/tabs/transaction/DetailTransaction';
 const App: React.FC = () => {
   const userContext = useContext(UserContext)
   const {initContext} = userContext
+  const [fetched, setFetched] = useState(false)
 
   useEffect(() => {
-    initContext()
-  }, [initContext])
+    if(!fetched){
+      initContext()
+      setFetched(true)
+    }
+  }, [])
 
   return (
     <IonApp>

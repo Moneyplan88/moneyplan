@@ -15,7 +15,7 @@ import { urlTrxAll } from '../../../../data/Urls';
 const HomeCard: React.FC = () => {
   const history = useHistory()
   const userContext = useContext(UserContext)
-  const [saldo, setSaldo] = useState(0)
+  const [fetched, setFetched] = useState(false)  
 
   useEffect(() => {
     // fetch(urlTrxAll,{ 
@@ -43,8 +43,11 @@ const HomeCard: React.FC = () => {
       if(userContext.getToken() == ''){
         history.push('/login')
       }else{
-        // Fetch all balance
-        userContext.fetchAllBalance()
+        if(!fetched){
+          // Fetch all balance
+          userContext.fetchAllBalance()
+          setFetched(true)
+        }
       }
     }
     checkToken()
