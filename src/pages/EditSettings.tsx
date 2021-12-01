@@ -17,6 +17,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import TitleBar from "../components/TitleBar";
 import { urlUserEdit } from "../data/Urls";
+import {Directory, Filesystem} from "@capacitor/filesystem";
 import UserContext from "../data/user-context";
 import { camera } from "ionicons/icons";
 import { base64FromPath } from "@ionic/react-hooks/filesystem";
@@ -142,13 +143,23 @@ const EditSettings: React.FC = () => {
     if (takenPhoto! !== undefined) {
       base64 = await base64FromPath(takenPhoto!.preview);
       var blob = new Blob([base64], { type: "image/jpg" });
+      await Filesystem.writeFile({
+        path: fileName,
+        data: base64,
+        directory: Directory.Data
+    })
       // const blob = dataURItoBlob(takenPhoto!.path)
       // file = dataURLtoFile(base64, fileName)
       console.log(takenPhoto!.preview);
+      const file = await Filesystem.readFile({
+        path: fileName,
+        directory: Directory.Data
+    })
       // const blob = b64toBlob(base64.replace("data:image/png;base64,", ""))
       // console.log(file)
       console.log(blob);
-      formData.append("photo_user", blob as Blob, "gambar1.jpg");
+      // console.log(file.data)
+      formData.append("photo_user",b64toBlob(file.data),"gambar1.jpg");
     }
     // console.log(base64)
 
