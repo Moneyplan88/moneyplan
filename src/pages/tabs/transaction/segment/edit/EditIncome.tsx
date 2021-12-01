@@ -168,7 +168,12 @@ const EditIncome : React.FC<{type: string}> = props => {
 
   return (
     <IonPage>
-      <IonContent>
+      <IonContent style={{
+          maxWidth: "414px",
+          alignSelf: "center",
+          backgroundColor: "transparent",
+
+        }}>
       <div style={{textAlign: 'center', marginTop: '10px', fontSize: '25px'}}>Edit Your Transaction</div>
         <IonList>
             <IonItem class="ion-item">

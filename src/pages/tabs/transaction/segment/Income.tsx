@@ -2,9 +2,10 @@ import React from "react"
 import {IonItemSliding, IonContent, IonIcon, useIonToast, useIonLoading, IonPage, IonItem, IonItemOption, IonItemOptions, IonLabel, IonList, IonFab, IonFabButton} from "@ionic/react"
 import {add, create, trash} from "ionicons/icons"
 import UserContext from '../../../../data/user-context';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import { urlTransactionDelete } from "../../../../data/Urls";
+import empty from '../../../images/empty.png';
 
 const Income:React.FC = () => {
     const history = useHistory()
@@ -98,7 +99,12 @@ const Income:React.FC = () => {
             }
         })
     }else{
-        layout = <p style={{textAlign: 'center'}}>No Income yet.</p>
+        layout = (
+            <div>
+                <img className="justify-content-center" src={empty} alt="No Transaction" />
+                <h4 className="align-center">No income yet.</h4>
+            </div>
+        )
     }
 
     return(

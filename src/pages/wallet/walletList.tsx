@@ -22,18 +22,17 @@ const WalletList:React.FC = () => {
         const checkToken = async() => {
             const token = await userContext.getToken()
             await setToken(token)
-            await userContext.fetchWallet()
+            // Fetch wallet if the length is 0
+            if(userContext.wallet.length === 0){
+            }else{
+                await userContext.fetchWallet()
+            }
             if(token === ''){
                 hideLoader()
                 history.push('/login')
             }else{
                 console.info("has token")
                 hideLoader()
-                // Fetch wallet if the length is 0
-                if(userContext.wallet.length === 0){
-                }else{
-                    console.info(userContext.wallet)
-                }
             }
         }
         checkToken()
@@ -69,6 +68,7 @@ const WalletList:React.FC = () => {
             hideLoader()
             if(res.data.success===true){
                 window.location.href = '/wallet'
+                userContext.fetchWallet()
                 showToast('Wallet berhasil didelete','success')
             } else{
                 showToast(res.data.errors.message,'danger')
@@ -117,7 +117,12 @@ const WalletList:React.FC = () => {
             </IonItemSliding>
         })
     }else{
-        layout = <p>No Wallet in yout account</p>
+        layout = (
+            <div>
+              <img className="justify-content-center" src="https://previews.123rf.com/images/mraoraor/mraoraor1703/mraoraor170300034/73194281-man-hand-open-an-empty-wallet-on-white-background.jpg" alt="No Spending" />
+              <h4 className="align-center">No wallet in your account.</h4>
+            </div>
+          )
     }
     
     return(

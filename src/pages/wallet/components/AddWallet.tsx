@@ -78,6 +78,7 @@ const AddWallet: React.FC = () => {
           message: "Success adding new wallet",
           duration: 2000,
         });
+        userContext.fetchWallet()
         history.push("/tabs/home");
       })
       .catch((err) => {

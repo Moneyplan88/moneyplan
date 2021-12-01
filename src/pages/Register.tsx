@@ -78,15 +78,25 @@ const submitRegisterHandler = () => {
 return (
     <IonPage>
       
-        <IonHeader>
+        <IonHeader style={{
+          maxWidth: "414px",
+          alignSelf: "center",
+          backgroundColor: "transparent",
+
+        }}>
         <IonToolbar color="primary">
           <IonTitle style={{fontWeight:'bold'}}>Register</IonTitle>
         </IonToolbar>
       </IonHeader>
       {/* <h1>Login</h1> */}
 
-      <IonContent>
-          <IonGrid>
+      <IonContent style={{
+          maxWidth: "414px",
+          alignSelf: "center",
+          backgroundColor: "transparent",
+
+        }}>
+          <IonGrid className="content">
             <IonRow>
               <IonCol>
               <IonItem>

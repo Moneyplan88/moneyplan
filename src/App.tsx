@@ -60,8 +60,7 @@ const App: React.FC = () => {
   }, [])
 
   return (
-    <IonApp>
-      
+    <IonApp >      
       <IonReactRouter>
           <IonRouterOutlet id="main">
             <Route exact path="/settings" component={Settings} />

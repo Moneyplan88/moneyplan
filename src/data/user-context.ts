@@ -9,6 +9,7 @@ const UserContext = React.createContext<{
     user: UserModel,
     wallet: Wallet[],
     totalBalance: number,
+    totalWallets: number,
     transaction: transaction[],
     categories: Category[],
     storeToken: (token: string) => void;
@@ -25,6 +26,7 @@ const UserContext = React.createContext<{
     user: {},
     wallet: [],
     totalBalance: 0,
+    totalWallets: 0,
     categories: [],
     transaction: [],
     storeToken: () => {},

@@ -63,12 +63,12 @@ const Settings:React.FC = () => {
                                 <IonLabel style={{marginLeft:'15px', fontWeight: 'bolder', fontSize:'1em'}}>Edit Profile</IonLabel>
                             </IonItem>
                         </IonRouterLink>
-                        <IonItem className="ion-no-border mt-3 mx-3" lines="none"
+                        {/* <IonItem className="ion-no-border mt-3 mx-3" lines="none"
                             style={{border:'solid 1.5px',borderRadius:'15px'}}>
                             <IonIcon icon={moon} />
                             <IonLabel style={{marginLeft:'15px', fontWeight: 'bolder', fontSize:'1em'}}>Dark Mode</IonLabel>
                             <IonToggle color="dark" onIonChange={toggleDarkModeHandler}></IonToggle>
-                        </IonItem>
+                        </IonItem> */}
                         <IonButton onClick={logoutHandler} color="danger" fill="solid" expand="block"
                             style={{borderRadius: '15px', marginTop: '15px', textAlign:'left'}} className="ion-text-left mx-3">
                             <IonIcon icon={logOut} />

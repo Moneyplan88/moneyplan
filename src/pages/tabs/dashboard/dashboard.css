@@ -61,3 +61,20 @@ ion-card {
 .trans-item{
     box-shadow: 0 3px 10px  rgb(4 17 60 / 0.5);
 }
+
+ion-header {
+    max-width: 640px !important;
+    align-self: center !important;
+    background-color: transparent !important;
+}
+
+ion-content {
+    max-width: 640px !important;
+    align-self: center !important;
+    background-color: transparent !important;
+}
+
+.align-center{
+    display: flex;
+    justify-content: center
+}

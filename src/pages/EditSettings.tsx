@@ -37,7 +37,12 @@ const EditSettings: React.FC = () => {
 
   const [presentToast, dismissToast] = useIonToast();
   const [showLoader, hideLoader] = useIonLoading();
+  async function dataUrlToFile(dataUrl: string, fileName: string): Promise<File> {
 
+    const res: Response = await fetch(dataUrl);
+    const blob: Blob = await res.blob();
+    return new File([blob], fileName, { type: 'image/png' });
+}
   useEffect(() => {
     const checkToken = async () => {
       if ((await userContext.getToken()) === "") {
@@ -157,9 +162,10 @@ const EditSettings: React.FC = () => {
     })
       // const blob = b64toBlob(base64.replace("data:image/png;base64,", ""))
       // console.log(file)
-      console.log(blob);
-      // console.log(file.data)
-      formData.append("photo_user",b64toBlob(file.data),"gambar1.jpg");
+      const fileOnly = new File([blob], fileName,{ type: "image/jpg" })
+      formData.append("photo_user",fileOnly)
+      console.log(fileOnly)
+      // formData.append("photo_user",await dataUrlToFile(file.data,fileName));
     }
     // console.log(base64)
 
