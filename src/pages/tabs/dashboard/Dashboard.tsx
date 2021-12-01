@@ -82,7 +82,7 @@ import axios from 'axios';
         <IonHeader className="ion-no-border">
                   <IonToolbar color="false">
                      
-                      <IonTitle style={{fontWeight: 'bolder'}}>Transaction list</IonTitle>
+                      <IonTitle style={{fontWeight: 'bolder'}}>Dashboard</IonTitle>
                       <IonButtons slot="end">
                           
                           <IonButton routerLink="/settings">

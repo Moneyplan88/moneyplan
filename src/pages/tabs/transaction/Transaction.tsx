@@ -12,6 +12,8 @@ import {
   IonTitle,
   IonToolbar,
   isPlatform,
+  useIonToast,
+  useIonLoading
 } from "@ionic/react";
 import { useContext, useState, useEffect } from "react";
 import Income from "./segment/Income";
@@ -26,21 +28,27 @@ const Transaction: React.FC = () => {
     const userContext = useContext(UserContext)
   const [selected, setSelected] = useState<string>("Income");
   const [fetched, setFetched] = useState(false)
-  
+  const [presentToast, dismissToast] = useIonToast();
+  const [showLoader, hideLoader] = useIonLoading();
   
   useEffect(() => {
     const checkToken = async() => {
-
-        if(await userContext.getToken() == ''){
+      
+      if(await userContext.getToken() == ''){
+          
             history.push('/login')
         }else{
+         
             if(userContext.transaction.length == 0 && !fetched){
                 userContext.fetchTransaction()
                 setFetched(true)
-            }
+              }
+         
         }
     }
+    // showLoader();
     checkToken()
+    // hideLoader()
 }, [userContext])
   return (
     <IonPage>
@@ -86,11 +94,7 @@ const Transaction: React.FC = () => {
         </IonSegment>
       </IonHeader>
 
-      <IonContent  style={{
-          maxWidth: "414px",
-          alignSelf: "center",
-          backgroundColor: "transparent",
-        }}>
+     
         {selected === "Income" ? (
           <Income />
         ) : selected === "Expense" ? (
@@ -98,7 +102,7 @@ const Transaction: React.FC = () => {
         ) : (
           ""
         )}
-      </IonContent>
+      
     </IonPage>
   );
 };

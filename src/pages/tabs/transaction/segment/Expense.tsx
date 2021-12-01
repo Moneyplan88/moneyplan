@@ -103,15 +103,14 @@ const Expense:React.FC = () => {
     }
 
     return(
-        <IonPage>
-            <div style={{
-                         textAlign: "center",
-                         fontSize: "25px",
-                         fontWeight: "bold",
-                         marginTop: "10px"
-                        }}>Your Expense</div>
+        
+           
 
-            <IonContent className="container">
+            <IonContent  style={{
+                maxWidth: "414px",
+                alignSelf: "center",
+                backgroundColor: "transparent",
+              }}>
                     <IonFab vertical="bottom" horizontal="end" slot="fixed">
                         <IonFabButton  href="/addTransaction">
                             <IonIcon icon={add} />
@@ -124,7 +123,7 @@ const Expense:React.FC = () => {
                         </div>      
                     </IonList>
             </IonContent>
-        </IonPage>
+        
     )
 }
 

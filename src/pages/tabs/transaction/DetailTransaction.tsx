@@ -39,17 +39,17 @@ const DetailTransaction: React.FC = () => {
       showLoader();
       const token = await userContext.getToken();
       console.log(token);
-
+      
       if (token === "") {
         history.push("/login");
       }
-
+      
       const options = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       };
-
+      
       axios(
         `https://mymoney.icedicey.com/api/transaction/user-transaction?id_transaction=${id}`,
         {
@@ -58,8 +58,9 @@ const DetailTransaction: React.FC = () => {
             Authorization: `Bearer ${token}`,
           },
         }
-      )
+        )
         .then((res) => {
+          
           setTransaction(res.data.data);
           const str = transaction.created_at;
           const date = moment(str);
