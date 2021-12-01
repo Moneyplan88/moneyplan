@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import UserContext from '../../../../data/user-context';
 import { urlTransactionDelete } from "../../../../data/Urls";
+import empty from '../../../images/empty.png';
 
 const Expense:React.FC = () => {
     const history = useHistory()
@@ -99,7 +100,12 @@ const Expense:React.FC = () => {
             }
         })
     }else{
-        layout = <p style={{textAlign: 'center'}}>No Expense yet.</p>
+        layout = (
+            <div>
+                <img className="justify-content-center" src={empty} alt="No Transaction" />
+                <h4 className="align-center">No expense yet.</h4>
+            </div>
+        )
     }
 
     return(

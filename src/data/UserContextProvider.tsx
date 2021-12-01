@@ -12,6 +12,7 @@ const UserContextProvider: React.FC = (props) => {
   const [transaction, setTransaction] = useState([])
   const [categories, setCategories] = useState([])
   const [totalBalance, setTotalBalance] = useState(0)
+  const [totalWallets, setTotalWallets] = useState(0)
 
   const storeToken = (token: string) => {
     // window.localStorage.setItem('key',token)
@@ -82,6 +83,7 @@ const UserContextProvider: React.FC = (props) => {
     }).then(val => {
       console.info(val.data)
       setTotalBalance(val.data.data.total_balance)
+      setTotalWallets(val.data.data.wallet_list.length)
     }).catch(err => {
       console.log("error: "+err)
     }) 
@@ -133,7 +135,8 @@ const UserContextProvider: React.FC = (props) => {
       user, 
       wallet,
       transaction,
-      totalBalance, 
+      totalBalance,
+      totalWallets, 
       categories,
       storeToken, 
       initContext, 

@@ -1,4 +1,4 @@
-import {IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar, useIonLoading, useIonToast } from '@ionic/react';
+import { IonImg, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar, useIonLoading, useIonToast } from '@ionic/react';
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { urlLogin } from '../data/Urls';
@@ -91,7 +91,7 @@ const Login: React.FC = () => {
     layout = (
       <IonContent>
         <IonGrid className="mx-5 ion-padding ion-text-center">
-        <img src={login} className="mt-3 mb-5" />
+        <img src={login} className="mt-3 mb-3" />
         <h1>Start Now!</h1>
         <p>Achieve your financial freedom in no time!</p>
         <button className="btn btn-primary" onClick={()=> setLoginClick(true)}>Login</button>
@@ -111,12 +111,14 @@ const Login: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        <IonContent  style={{
-          maxWidth: "414px",
-          alignSelf: "center",
-          backgroundColor: "transparent",
-        }}>
-          <IonGrid id="content">
+        <IonContent>
+          <IonGrid className="content">
+            <IonRow>
+              <IonCol>
+                <IonImg src={login} />
+              </IonCol>
+            </IonRow>
+
             <IonRow>
               <IonCol>
               <IonItem>

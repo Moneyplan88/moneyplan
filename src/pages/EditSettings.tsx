@@ -34,10 +34,15 @@ const EditSettings: React.FC = () => {
   const [password, setPassword] = useState("");
   const [photo, setPhoto] = useState("");
   const [token, setToken] = useState("");
-
+  const fileTemp = useRef<HTMLInputElement>(null)
   const [presentToast, dismissToast] = useIonToast();
   const [showLoader, hideLoader] = useIonLoading();
+  async function dataUrlToFile(dataUrl: string, fileName: string): Promise<File> {
 
+    const res: Response = await fetch(dataUrl);
+    const blob: Blob = await res.blob();
+    return new File([blob], fileName, { type: 'image/png' });
+}
   useEffect(() => {
     const checkToken = async () => {
       if ((await userContext.getToken()) === "") {
@@ -105,6 +110,16 @@ const EditSettings: React.FC = () => {
     return blob;
   };
 
+  function dataURLtoBlob(dataurl:any) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], {type:mime});
+}
+
+
   const takePhotoHandler = async () => {
     const photo = Camera.getPhoto({
       resultType: CameraResultType.Uri,
@@ -135,6 +150,7 @@ const EditSettings: React.FC = () => {
 
     let file: Blob;
     let base64: any;
+    
     const fileName = new Date().getTime() + ".jpg";
     const formData = new FormData();
     formData.append("email", email);
@@ -157,9 +173,10 @@ const EditSettings: React.FC = () => {
     })
       // const blob = b64toBlob(base64.replace("data:image/png;base64,", ""))
       // console.log(file)
-      console.log(blob);
-      // console.log(file.data)
-      formData.append("photo_user",b64toBlob(file.data),"gambar1.jpg");
+      const fileOnly = new File([dataURLtoBlob(base64)], fileName,{ type: "image/png" })
+      formData.append("photo_user", fileOnly)
+      console.log(fileOnly)
+      // formData.append("photo_user",await dataUrlToFile(file.data,fileName));
     }
     // console.log(base64)
 
@@ -225,6 +242,7 @@ const EditSettings: React.FC = () => {
               </IonButton>
             </IonCol>
           </IonRow>
+         
 
           <IonRow>
             <IonCol>

@@ -59,14 +59,14 @@ const HomeCard: React.FC = () => {
         <img className="home-card" src={homeCard}/>
         <div className="card-content mx-3">
           <div style={{fontSize:'12px', fontWeight:'bold'}}>
-            Your balance 
+            Total wallet balance 
           </div>
-          <div style={{fontSize:'24px', fontWeight:'bolder'}}>
+          <div className="ow" style={{fontSize:'24px', fontWeight:'bolder'}}>
             {Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(userContext.totalBalance as number)}
           </div>
           <div className="mt-2" style={{display:'flex'}}>
             <IonIcon icon={wallet} style={{width:'20px', height:'20px'}} />
-            <span style={{marginLeft:'4px'}}>Wallet</span>
+            <span style={{marginLeft:'4px'}}>{userContext.totalWallets > 1 ? `${userContext.totalWallets} Wallets` : `${userContext.totalWallets} Wallet`}</span>
           </div>
         </div>
     </div>

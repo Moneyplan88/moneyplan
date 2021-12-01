@@ -121,6 +121,7 @@ import {
         }) 
         // history.push('/wallet')
         window.location.href = '/wallet'
+        userContext.fetchWallet()
       })
       .catch(err => {
         console.log(err)
