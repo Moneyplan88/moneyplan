@@ -42,6 +42,7 @@ const Home: React.FC = () => {
           setPic('https://mymoney.icedicey.com/' + userContext.user.photo_user)
           // Fetch user info
           if(name === '' && !fetched){
+            console.log('fetching...')
             userContext.fetchInfo()
             userContext.fetchTransaction()
             // userContext.fetchWallet()
