@@ -48,7 +48,7 @@ const Home: React.FC = () => {
             // userContext.fetchWallet()
             setFetched(true)
           }
-      }  
+        }  
     }
     checkToken()
   }, [userContext])

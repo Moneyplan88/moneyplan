@@ -52,17 +52,18 @@ const Login: React.FC = () => {
     formData.append('email',email)
     formData.append('password',password)
     
+    showLoader({
+      message: "Loading...",
+      spinner: "circular"
+    })
+    
     fetch(urlLogin,{ 
       method: "POST",
       body: formData
     }).then(res => res.json())
     .then(data => {
       console.log(data)
-      
-      showLoader({
-        message: "Loading...",
-        spinner: "circular"
-      })
+    
       // Sukses login
       if(data.success == true){
         hideLoader()
