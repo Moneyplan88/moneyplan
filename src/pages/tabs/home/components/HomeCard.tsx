@@ -6,52 +6,24 @@ import {
 
 import homeCard from '../images-home/home.png';
 import '../home.css';
-import { cogSharp, wallet } from 'ionicons/icons';
-import { useContext, useEffect, useState } from 'react';
+import { wallet } from 'ionicons/icons';
+import { useContext, useEffect } from 'react';
 import UserContext from '../../../../data/user-context';
 import { useHistory } from 'react-router';
-import { urlTrxAll } from '../../../../data/Urls';
 
 const HomeCard: React.FC = () => {
   const history = useHistory()
   const userContext = useContext(UserContext)
-  const [fetched, setFetched] = useState(false)  
 
   useEffect(() => {
-    // fetch(urlTrxAll,{ 
-    //   headers: {
-    //     'Authorization': 'Bearer ' + userContext.token,
-    //   }
-    // }).then(res => {
-    //   if(res.status != 500){
-    //     console.log("tdk 500")
-    //     return res.json()
-    //   }
-    // })
-    // .then(data => {
-    //   console.log(data)
-    //   const saldoData = data[0] ?? 0
-    //   setSaldo(saldoData)
-    // })
-    // .catch(err => {
-    //   console.log(err)
-    //   setSaldo(0)
-    // })
-
-    const checkToken = async() => {
-
-      if(userContext.getToken() == ''){
-        history.push('/login')
-      }else{
-        if(!fetched){
-          // Fetch all balance
-          userContext.fetchAllBalance()
-          setFetched(true)
-        }
+    if(userContext.getToken() == ''){
+      history.push('/login')
+    }else{
+      if((userContext.totalBalance == 0 && userContext.totalWallets == 0) ){
+        // Fetch all balance
+        userContext.fetchAllBalance()
       }
     }
-    checkToken()
-  
   }, [userContext])
 
   return <IonRouterLink routerLink="/wallet">
