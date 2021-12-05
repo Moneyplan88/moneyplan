@@ -1,8 +1,4 @@
 import {
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonPage,
   IonList,
   IonItem,
   IonInput,
@@ -21,8 +17,7 @@ import UserContext from '../../../../../data/user-context';
 import { urlTransactionEdit, urlTransactionInfo } from '../../../../../data/Urls';
 import axios from 'axios';
 
-const EditIncome : React.FC<{type: string}> = props => {
-  const {type} = props
+const EditIncome : React.FC = () => {
   const history = useHistory()
   const userContext = useContext(UserContext)
   const [title, setTitle] = useState('')
@@ -31,50 +26,45 @@ const EditIncome : React.FC<{type: string}> = props => {
   const [description, setDescrition] = useState('')
   const [infoTrans, setInfoTrans] = useState({})
   const [wallet, setWallet] = useState('')
+  const [type,setType] = useState('')
   const { id } = useParams<{id: string}>()
 
   const [presentToast, dismissToast] = useIonToast()
   const [showLoader, hideLoader] = useIonLoading()
 
   useEffect(() => {
-
     const getToken = async() => {
+      const token = await userContext.getToken()
+      console.log(token)
 
-        const token = await userContext.getToken()
-        console.log(token)
-
-        if(token === ''){
-            history.push('/login')
-        }else{
-          if(userContext.categories.length == 0){
-            userContext.fetchAllCategory()
-          }
-          if(userContext.wallet.length == 0){
-            userContext.fetchWallet()
-          }
+      if(token === ''){
+          history.push('/login')
+      }else{
+        if(userContext.categories.length == 0){
+          userContext.fetchAllCategory()
         }
+        if(userContext.wallet.length == 0){
+          userContext.fetchWallet()
+        }
+      }
 
-      // console.log(token)
-      console.log(id)
       axios(urlTransactionInfo+id, {
-          method: 'get',
-          headers: {
-            Authorization: `Bearer ${token}` 
-          } 
-          
+        method: 'get',
+        headers: {
+          Authorization: `Bearer ${token}` 
+        } 
       }).then(res => {
-          console.log(res)
-          setInfoTrans(res)
-          setTitle(res.data.data.title)
-            setDescrition(res.data.data.description)
-            setAmount(res.data.data.amount)
-            setCategory(res.data.data.id_transaction_category)
-            setWallet(res.data.data.id_user_wallet)
-        }).catch(err => console.log(err))
+        console.log(res)
+        setInfoTrans(res)
+        setType(res.data.data.type)
+        setTitle(res.data.data.title)
+        setDescrition(res.data.data.description)
+        setAmount(res.data.data.amount)
+        setCategory(res.data.data.id_transaction_category)
+        setWallet(res.data.data.id_user_wallet)
+      }).catch(err => console.log(err))
     }
     getToken()
-    
-    
   }, [userContext.transaction])
 
   const showToast = (msg: string, color: ('danger'|'success')) => {    
@@ -106,6 +96,7 @@ const EditIncome : React.FC<{type: string}> = props => {
     formData.append('title',title)
     formData.append('amount',amount.toString())
     formData.append('description',description)
+    formData.append('id_transaction',id)
     formData.append('type',type)
     formData.append('id_transaction_category',category)
     formData.append('id_user_wallet', wallet)
@@ -125,6 +116,7 @@ const EditIncome : React.FC<{type: string}> = props => {
     .then(data => {
       console.log(data)
       hideLoader()
+      history.push('/tabs/transaction')
       presentToast({
         buttons: [
           { text: 'Yay!', handler: () => history.push('/wallet') },
@@ -132,9 +124,7 @@ const EditIncome : React.FC<{type: string}> = props => {
         color: 'success',
         message: 'Transaction has been edited',
         duration: 2000,
-      }) 
-      // history.push('/wallet')
-      window.location.href = '/tabs/transaction'
+      })
     })
     .catch(err => {
       console.log(err)

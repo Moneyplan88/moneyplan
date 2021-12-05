@@ -1,6 +1,5 @@
-import { IonApp, IonRouterOutlet, IonTabs, IonTabBar, IonLabel, IonTabButton, IonIcon } from '@ionic/react';
+import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import {home, receipt, podium} from 'ionicons/icons'
 import './theme/darkMode.css'
 
 /* Core CSS required for Ionic components to work properly */
@@ -22,7 +21,6 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import { Redirect, Route } from 'react-router';
-import Onboarding from './pages/Onboarding';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Tabs from './pages/tabs/Tabs';
@@ -39,11 +37,6 @@ import AddCategory from './pages/tabs/transaction/segment/category/AddCategory';
 import Category from './pages/tabs/transaction/segment/category/Category';
 import EditWallet from './pages/wallet/components/EditWallet';
 import DetailWallet from './pages/wallet/components/DetailWallet';
-import UserContextProvider from './data/UserContextProvider';
-import Home from './pages/tabs/home/Home';
-import Transaction from './pages/tabs/dashboard/Dashboard';
-import Dashboard from './pages/tabs/dashboard/Dashboard';
-import Wallet from './model/wallet.model';
 import DetailTransaction from './pages/tabs/transaction/DetailTransaction';
 
 
@@ -69,11 +62,6 @@ const App: React.FC = () => {
             <Route exact path="/wallet/edit/:id" component={EditWallet} />
             <Route exact path="/wallet/:id" component={DetailWallet} />
             <Route exact path='/wallet/add' component={AddWallet}/>
-            {/* <Route exact path='/wallet/edit' render={(props) => {
-              console.log(props)
-              return <EditWallet walletData={props.location.state as Wallet} />
-            }}/> */}
-            {/* <Route exact path='/start' component={Onboarding}/> */}
             <Route exact path='/start' component={Welcome}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register}/>
