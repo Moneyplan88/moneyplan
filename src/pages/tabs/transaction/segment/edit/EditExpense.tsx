@@ -17,7 +17,7 @@ import {
     const [text, setText] = useState<string>();
 
     return (
-      <IonPage>
+      
         <IonList>
             <IonItem style={{margin: '5%'}}>
               <IonInput value={text} placeholder="Enter Input" onIonChange={e => setText(e.detail.value!)}></IonInput>
@@ -44,7 +44,7 @@ import {
             </IonItem>
 
           </IonList>
-      </IonPage>
+     
     );
   };
   

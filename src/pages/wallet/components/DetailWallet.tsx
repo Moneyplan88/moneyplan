@@ -110,7 +110,7 @@ const DetailWallet: React.FC = () => {
 
   return (
     <IonPage>
-      <TitleBar title="Edit Wallet" profile={true} />
+      <TitleBar title={`Wallet `+wallet} profile={true} />
       {wallet !== "" && (
         <IonContent>
           <IonGrid>
