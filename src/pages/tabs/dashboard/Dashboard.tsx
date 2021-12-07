@@ -146,7 +146,7 @@ import {
         }
       }
       checkToken()
-    }, [userContext])
+    }, [])
 
     const options = {
       responsive: true,

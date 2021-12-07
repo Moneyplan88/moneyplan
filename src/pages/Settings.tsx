@@ -38,9 +38,9 @@ const Settings:React.FC = () => {
             <IonContent>
                 <div className="content">    
                     <IonGrid>
-                        <div style={{display: 'flex', justifyContent: 'center', width:'full', height:'17%'}}>
-                            <IonAvatar style={{height:'100%',width:'105px', backgroundColor: 'transparent'}}>
-                                <img src={userContext.user.photo_user ? 'https://mymoney.icedicey.com/' + userContext.user.photo_user : "/assets/icon/default-profile.png" }/>
+                        <div style={{display: 'flex', justifyContent: 'center', width:'full', height:'100px'}}>
+                            <IonAvatar style={{height:'100%',width:'100px', backgroundColor: 'transparent'}}>
+                                <img src={userContext.user.photo_user ? 'https://mymoney.icedicey.com/' + userContext.user.photo_user : "/assets/icon/default-profile.png" }  style={{height:'100%',width:'100px'}}/>
                             </IonAvatar>
                         </div>
                         {/* <IonRow>

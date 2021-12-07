@@ -29,11 +29,11 @@ const WalletList:React.FC = () => {
                 history.push('/login')
             }else{
                 console.info("has token")
-                hideLoader()
+                // hideLoader()
             }
         }
         checkToken()
-        hideLoader()
+        // hideLoader()
 
     }, [])
 

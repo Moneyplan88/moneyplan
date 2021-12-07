@@ -179,6 +179,7 @@ const EditSettings: React.FC = () => {
 
         // Sukses login
         if (data.data.success === true) {
+          hideLoader();
           showToast("Change profile success", "success");
 
           // Simpan token
@@ -189,6 +190,7 @@ const EditSettings: React.FC = () => {
         }
         // Gagal login
         else {
+          hideLoader();
           showToast(data.data.errors, "danger");
         }
       })

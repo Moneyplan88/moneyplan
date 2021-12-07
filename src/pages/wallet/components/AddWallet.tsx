@@ -72,14 +72,15 @@ const AddWallet: React.FC = () => {
         hideLoader();
         presentToast({
           buttons: [
-            { text: "Yay!", handler: () => history.push("/tabs/home") },
+            { text: "Yay!" },
           ],
           color: "success",
           message: "Success adding new wallet",
           duration: 2000,
         });
         userContext.fetchWallet()
-        history.push("/tabs/home");
+        window.location.href = "/tabs/home"
+        // history.push("/tabs/home");
       })
       .catch((err) => {
         console.log(err);

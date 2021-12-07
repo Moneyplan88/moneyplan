@@ -165,12 +165,12 @@ const AddIncome: React.FC<{type: string}> = props => {
             <IonButton class="ion-item ion-button" routerLink="/category">
               Manage Category
             </IonButton>
-            <IonButton class="ion-item ion-button" routerLink="/category">
+            {/* <IonButton class="ion-item ion-button" routerLink="/category">
               <IonIcon icon={cameraOutline}>
 
               </IonIcon>
               Manage Category
-            </IonButton>
+            </IonButton> */}
 
             <IonItem class="ion-item">
               <IonLabel>Wallet</IonLabel>

@@ -52,20 +52,20 @@ const Login: React.FC = () => {
     formData.append('email',email)
     formData.append('password',password)
     
+    
     showLoader({
-      message: "Loading...",
+      message: "Logging in...",
       spinner: "circular"
     })
-    
     fetch(urlLogin,{ 
       method: "POST",
       body: formData
     }).then(res => res.json())
     .then(data => {
       console.log(data)
-    
+      hideLoader()
       // Sukses login
-      if(data.success == true){
+      if(data.success === true){
         hideLoader()
         showToast('Login success','success')
 

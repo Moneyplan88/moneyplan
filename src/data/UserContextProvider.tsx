@@ -16,7 +16,7 @@ const UserContextProvider: React.FC = (props) => {
 
   const storeToken = (token: string) => {
     // window.localStorage.setItem('key',token)
-    console.log(token)
+    // console.log(token)
     setToken(token)
     Storage.set({ key: 'token', value: JSON.stringify(token) })
   }
@@ -29,7 +29,7 @@ const UserContextProvider: React.FC = (props) => {
 
   const fetchInfo = async () => {
     const {value} = await Storage.get({key: 'token'});
-    console.log(value)
+    // console.log(value)
     await axios.get(urlUserInfo, {
       headers: {
         Authorization: `Bearer ${JSON.parse(value!)}`,
@@ -37,7 +37,7 @@ const UserContextProvider: React.FC = (props) => {
     }).then(val => {
       const userInfo: UserModel = val.data.data
       setUser(userInfo)
-      console.info(userInfo)
+      // console.info(userInfo)
     }).catch(err => {
       console.log("error: "+err)
       // Set back token to null since token is invalid
@@ -47,13 +47,13 @@ const UserContextProvider: React.FC = (props) => {
 
   const fetchWallet = async () => {
     const {value} = await Storage.get({key: 'token'});
-    console.log(value)
+    // console.log(value)
     await axios.get(urlWalletList, {
       headers: {
         Authorization: `Bearer ${JSON.parse(value!)}`,
       },
     }).then(val => {
-      console.info(val.data.data)
+      // console.info(val.data.data)
       setWallet(val.data.data)
     }).catch(err => {
       console.log("error: "+err)
@@ -67,7 +67,7 @@ const UserContextProvider: React.FC = (props) => {
         Authorization: `Bearer ${token}`,
       },
     }).then(val => {
-      console.info(val.data)
+      // console.info(val.data)
       setTransaction(val.data.data)
     }).catch(err => {
       console.log("error fetch trx: "+err)
@@ -106,7 +106,7 @@ const UserContextProvider: React.FC = (props) => {
   const initContext = useCallback(async () => {
     const result = await Storage.get({ key: 'token' })
     const tokenRes = result.value ? JSON.parse(result.value) : ''
-    console.info('initing ... ', tokenRes)
+    // console.info('initing ... ', tokenRes)
     setToken(tokenRes)
 
     if (tokenRes != '') {
@@ -117,7 +117,7 @@ const UserContextProvider: React.FC = (props) => {
       }).then(val => {
         const userInfo: UserModel = val.data.data
         setUser(userInfo)
-        console.info(userInfo)
+        // console.info(userInfo)
       }).catch(err => {
         console.log("error: "+err)
         // Set back token to null since token is invalid
